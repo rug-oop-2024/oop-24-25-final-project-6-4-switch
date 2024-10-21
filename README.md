@@ -152,31 +152,31 @@ If the feature has been implemented by both students, write `both`.
 If you did not implement the feature
 
 | Requirement                           | Type (FN/NF) | Implemented by       | Implementation Completed (add X if done) | Comment |
-|-------------------------------------- |--------------|----------------------|--------------------------|---------|         
-| Up-to-date requirements.txt           | NF           |                      |         | |
-| `ML/detect-features`                  | FN           |                      |         | |
-| `ML/artifact`                         | NF           |                      |         | |
-| `ML/feature`                          | NF           |                      |         | |
-| `ML/metric`                           | NF           |                      |         | |
-| `ML/metric/extensions`                | FN           |                      |         | |
-| `ML/model`                            | NF           |                      |         | |
-| `ML/model/extensions`                 | FN           |                      |         | |
-| `ML/pipeline/evaluation`              | FN           |                      |         | | 
-| `ST/page/datasets`                    | NF           |                      |         | |
-| `ST/datasets/management/create`       | FN           |                      |         | |
-| `ST/datasets/management/save`         | FN           |                      |         | |
-| `ST/page/modelling`                   | NF           |                      |         | |
-| `ST/modelling/datasets/list`          | FN           |                      |         | |
-| `ST/modelling/datasets/features`      | FN           |                      |         | |
-| `ST/modelling/models`                 | FN           |                      |         | |
-| `ST/modelling/pipeline/split`         | FN           |                      |         | |
-| `ST/modelling/pipeline/metrics`       | FN           |                      |         | |
-| `ST/modelling/pipeline/summary`       | FN           |                      |         | |
-| `ST/modelling/pipeline/train`         | FN           |                      |         | |
-| `ST/modelling/pipeline/save`          | FN           |                      |         | |
-| `ST/page/deployment`                  | FN           |                      |         | |
-| `ST/deployment/load`                  | FN           |                      |         | |
-| `ST/deployment/predict`               | FN           |                      |         | |
+|-------------------------------------- |--------------|----------------------|------------------------------------------|---------|         
+|`Up-to-date requirements.txt`          |NF            |Jia Hao Zhang         |x                                         |Only the base packages(15-10-2024)|
+|`ML/detect-features`|FN|Jia Hao Zhang|x|Only garentee to work for the premade test.|
+|`ML/artifact`|NF|Jia Hao Zhang|x|Added atributes that were in instructions into the class, without breaking detect feature. Not garrenteed to work on other situations.|
+|`ML/feature`|NF|Jia Hao Zhang|x| Made type in feature a literal to make sure the user complies tih the two types of data. the class is only garenteed to work with test feature detect and no other processes.|
+|`ML/metric`|NF|Marcus Persson|x|Need to determine if typing is needed.|
+|`ML/metric/extensions`|FN|Marcus Persson|x||
+|`ML/model`|NF|Marcus Persson|         | |
+|`ML/model/extensions`|FN|Marcus Persson|         | |
+|`ML/pipeline/evaluation`|FN|Marcus Persson|         | | 
+|`ST/page/datasets`|NF|Jia Hao Zhang|         | |
+|`ST/datasets/management/create`|FN|                      |         | |
+|`ST/datasets/management/save`|FN|                      |         | |
+|`ST/page/modelling`|NF|                      |         | |
+|`ST/modelling/datasets/list`|FN|                      |         | |
+|`ST/modelling/datasets/features`|FN|                      |         | |
+|`ST/modelling/models`|FN|                      |         | |
+|`ST/modelling/pipeline/split`|FN|                      |         | |
+|`ST/modelling/pipeline/metrics`|FN|                      |         | |
+|`ST/modelling/pipeline/summary`|FN|                      |         | |
+|`ST/modelling/pipeline/train`|FN|                      |         | |
+|`ST/modelling/pipeline/save`|FN|                      |         | |
+|`ST/page/deployment`|FN|                      |         | |
+|`ST/deployment/load`|FN|                      |         | |
+|`ST/deployment/predict`|FN|                      |         | |
 
 If you add extra features, please indicate them below:
 | Requirement                           | Type (FN/NF) | Implemented by       | Implementation Completed (add X if done) | Comment |
