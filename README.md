@@ -165,10 +165,10 @@ If you did not implement the feature
 | `ST/page/datasets`                    |NF            |Jia Hao Zhang         |X        |Basic dataset viewing and saving seems to work.|
 | `ST/datasets/management/create`       |FN            |Jia Hao Zhang         |X        |it does create new dataset fro now. needs more testing and seeing how to do it properly later.|
 |`ST/datasets/management/save`          |FN            |Jia Hao Zhang         |x        |It saves the dataset. no idea if it properly done. only confirmed to that you can get to the data from dataset class data for previewing. |
-|`ST/page/modelling`                    |NF            |Jia Hao Zhang         |         | |
-|`ST/modelling/datasets/list`           |FN            |                      |         | |
-|`ST/modelling/datasets/features`       |FN            |                      |         | |
-|`ST/modelling/models`                  |FN            |                      |         | |
+|`ST/page/modelling`                    |NF            |Jia Hao Zhang         |X        |partially done. |
+|`ST/modelling/datasets/list`           |FN            |Jia Hao Zhang         |X        |made this feature to turn artifacts into datasets|
+|`ST/modelling/datasets/features`       |FN            |Jia Hao Zhang         |X        |Just used the detect features directly instead of making a new wrapper. |
+|`ST/modelling/models`                  |FN            |Jia Hao Zhang         |         | |
 |`ST/modelling/pipeline/split`          |FN            |                      |         | |
 |`ST/modelling/pipeline/metrics`        |FN            |                      |         | |
 |`ST/modelling/pipeline/summary`        |FN            |                      |         | |

@@ -16,4 +16,4 @@ class Feature(BaseModel):
     type: Literal["numerical", "categorical"] = Field()
 
     def __str__(self):
-        raise f"Column {self.name} is {self.type}"
+        return f"Column {self.name} is {self.type}"
