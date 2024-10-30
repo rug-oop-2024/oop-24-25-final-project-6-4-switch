@@ -73,12 +73,23 @@ if target_colum is not None:
     metrics: list[Metric] = st.multiselect("select metrics.",
                                            get_metrics(task_type))
 
-    pipeline: Pipeline = Pipeline(
-        metrics,
-        datasets[dataset_names.index(selected_dataset)],
-        model,
-        input_features,
-        target_colum,
-        split
-        )
-    
+    if model is not None and metrics is not None:
+        pipeline: Pipeline = Pipeline(
+            metrics,
+            datasets[dataset_names.index(selected_dataset)],
+            model,
+            input_features,
+            target_colum,
+            split
+            )
+
+        st.write(pipeline)
+
+        if st.button("start train."):
+            pipeline_result: dict = pipeline.execute()
+
+            st.write(
+                f"metrics of the pipeline: {pipeline_result['metrics']}")
+            st.write(
+                "predictionss of the pipeline:"
+                + f"{pipeline_result['predictions']}")
