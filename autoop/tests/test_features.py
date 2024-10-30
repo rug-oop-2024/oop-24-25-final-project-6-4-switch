@@ -2,9 +2,9 @@ import unittest
 from sklearn.datasets import load_iris, fetch_openml
 import pandas as pd
 
-from autoop.core.ml.dataset import Dataset
-from autoop.core.ml.feature import Feature
-from autoop.functional.feature import detect_feature_types
+from autoop.core.ml.dataset import Dataset  # noqa : E402
+from autoop.core.ml.feature import Feature  # noqa : E402
+from autoop.functional.feature import detect_feature_types  # noqa : E402
 
 
 class TestFeatures(unittest.TestCase):
