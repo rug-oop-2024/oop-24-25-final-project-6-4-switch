@@ -7,5 +7,6 @@ from typing import Literal
 
 
 class Model:
+    """Base class for regression and clasification models."""
     # your code (attribute and methods) here
     pass

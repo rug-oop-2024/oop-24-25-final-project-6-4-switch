@@ -1,5 +1,3 @@
-from autoop.core.ml.model.classification import *
-from autoop.core.ml.model.regression import *
 from autoop.core.ml.model import Model
 
 

@@ -1,17 +1,23 @@
 from autoop.core.ml.artifact import Artifact
-from abc import ABC, abstractmethod
 import pandas as pd
 import io
 
 
 class Dataset(Artifact):
     """A class to represent an ML dataset"""
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
+        """
+        Initialize Dataset class with given arbetriery amount erguments and
+        keyword arguments.
+
+        Returns:
+        None
+        """
         super().__init__(type="dataset", *args, **kwargs)
 
     @staticmethod
     def from_dataframe(data: pd.DataFrame, name: str,
-                       asset_path: str, version: str = "1.0.0"):
+                       asset_path: str, version: str = "1.0.0") -> "Dataset":
         """ Create a dataset from a pandas dataframe."""
         return Dataset(
             name=name,

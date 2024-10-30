@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 
 from app.core.system import AutoMLSystem
 from app.datasets.list import list_dataset
@@ -13,15 +12,23 @@ from app.modelling.models import get_models
 st.set_page_config(page_title="Modelling", page_icon="📈")
 
 
-def write_helper_text(text: str):
+def write_helper_text(text: str) -> None:
+    """
+    Write text.
+
+    Arguments:
+        text (str): text to write.
+
+    Returns:
+        None
+    """
     st.write(f"<p style=\"color: #888;\">{text}</p>", unsafe_allow_html=True)
 
 
 st.write("# ⚙ Modelling")
 write_helper_text(
-    "In this section," +
-    "you can design a machine learning pipeline to train a model on a dataset."
-    )
+    "In this section, you can design a machine learning pipeline to"
+    + "train a model on a dataset.")
 
 automl: AutoMLSystem = AutoMLSystem.get_instance()
 
@@ -33,8 +40,7 @@ dataset_names: list[str] = [_.name for _ in datasets]
 selected_dataset = st.selectbox("Select dataset to model", dataset_names)
 
 feature_list: list[Feature] = detect_feature_types(
-    datasets[dataset_names.index(selected_dataset)]
-    )
+    datasets[dataset_names.index(selected_dataset)])
 
 target_colum: Feature = st.selectbox("select target feature", feature_list)
 

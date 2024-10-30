@@ -23,6 +23,15 @@ class Artifact(BaseModel):
     tags: list[str] = Field(default=[])
 
     def read(self) -> bytes:
+        """
+        Return data saved in this artifact.
+
+        Arguments:
+            None
+
+        Returns:
+            None
+        """
         return self.data
 
     @property

@@ -77,6 +77,21 @@ class MeanSquaredError(Metric):
     """Mean Squared Error metric implementation for regression."""
 
     def __call__(self, truth: np.ndarray, pred: np.ndarray):
+        """
+        Calculate mean Squared error.
+
+        Parameters
+        ----------
+        truth : ndarray
+            Grouth truth values.
+        pred : ndarray
+            Predicted values.
+
+        Returns
+        -------
+        float
+            Real number representing the metric value.
+        """
         return np.mean((truth - pred) ** 2)
 
 
@@ -84,6 +99,21 @@ class MeanAbsoluteError(Metric):
     """Mean Absolute Error (MAE) metric implementation for regression."""
 
     def __call__(self, truth: np.ndarray, pred: np.ndarray) -> float:
+        """
+        Calculate mean absolure error.
+
+        Parameters
+        ----------
+        truth : ndarray
+            Grouth truth values.
+        pred : ndarray
+            Predicted values.
+
+        Returns
+        -------
+        float
+            Real number representing the metric value.
+        """
         return np.mean(np.abs(truth - pred))
 
 
@@ -91,6 +121,21 @@ class RSquared(Metric):
     """R-Squared (R^2) metric implementation for regression."""
 
     def __call__(self, truth: np.ndarray, pred: np.ndarray) -> float:
+        """
+        Calculate R Squared.
+
+        Parameters
+        ----------
+        truth : ndarray
+            Grouth truth values.
+        pred : ndarray
+            Predicted values.
+
+        Returns
+        -------
+        float
+            Real number representing the metric value.
+        """
         sum_squares = np.sum((truth - pred) ** 2)
         sum_total = np.sum((truth - np.mean(truth)) ** 2)
 
@@ -103,6 +148,21 @@ class Accuracy(Metric):
     """Accuracy metric implementation for classification."""
 
     def __call__(self, truth: np.ndarray, pred: np.ndarray):
+        """
+        Calculate accuracy.
+
+        Parameters
+        ----------
+        truth : ndarray
+            Grouth truth values.
+        pred : ndarray
+            Predicted values.
+
+        Returns
+        -------
+        float
+            Real number representing the metric value.
+        """
         return np.mean(truth == pred)
 
 
@@ -110,6 +170,21 @@ class Precision(Metric):
     """Precision metric implementation for classification."""
 
     def __call__(self, truth: np.ndarray, pred: np.ndarray) -> float:
+        """
+        Calculate precision.
+
+        Parameters
+        ----------
+        truth : ndarray
+            Grouth truth values.
+        pred : ndarray
+            Predicted values.
+
+        Returns
+        -------
+        float
+            Real number representing the metric value.
+        """
         true_pos = np.sum((truth == 1) & (pred == 1))
         false_pos = np.sum((truth == 0) & (pred == 1))
 
@@ -120,9 +195,24 @@ class LogLoss(Metric):
     """Logarithmic Loss implemenation for classication."""
 
     def __call__(self, truth: np.ndarray, pred: np.ndarray) -> float:
+        """
+        Calculate log loss metric.
+
+        Parameters
+        ----------
+        truth : ndarray
+            Grouth truth values.
+        pred : ndarray
+            Predicted values.
+
+        Returns
+        -------
+        float
+            Real number representing the metric value.
+        """
         # Prevent taking log of 0 by clipping the array
         pred_clipped = np.clip(pred, 1e-15, 1 - 1e-15)
 
-        return -np.mean(truth * np.log(pred_clipped) + (1 - truth) *
-                        np.log(1 - pred_clipped))
+        return -np.mean(truth * np.log(pred_clipped) + (1 - truth)
+                        * np.log(1 - pred_clipped))
 # endregion

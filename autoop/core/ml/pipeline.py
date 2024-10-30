@@ -11,6 +11,7 @@ import numpy as np
 
 
 class Pipeline():
+    """Class for training and predicting pipeline."""
 
     def __init__(self,
                  metrics: List[Metric],
@@ -18,8 +19,24 @@ class Pipeline():
                  model: Model,
                  input_features: List[Feature],
                  target_feature: Feature,
-                 split=0.8,
-                 ):
+                 split: float = 0.8,
+                 ) -> None:
+        """
+        Initialize the pipeline class.
+
+        Argument:
+            metrics (List[Metrics]): list of metrics for in this pipeline.
+            dataset (Dataset): Dataset for the this pipeline to fit.
+            model (Model): Regression or prediction model for this pipeline.
+            input_featires (List[Feature]): List of features in dataset to
+            use as independen variables.
+            target_feature (Feature): Feature that this pipeline shoudl target
+            regressing or predicting
+            split (float): The split of data to training and testing.
+
+        Returns:
+            None
+        """
         self._dataset = dataset
         self._model = model
         self._input_features = input_features
@@ -27,17 +44,26 @@ class Pipeline():
         self._metrics = metrics
         self._artifacts = {}
         self._split = split
-        if (target_feature.type == "categorical" and
-                model.type != "classification"):
-            raise ValueError("Model type must be classification for" +
-                             "categorical target feature")
+        if (target_feature.type == "categorical"
+                and model.type != "classification"):
+            raise ValueError("Model type must be classification for"
+                             + "categorical target feature")
         if target_feature.type == "continuous" and model.type != "regression":
-            raise ValueError("Model type must be regression for continuous" +
-                             "target feature")
+            raise ValueError("Model type must be regression for continuous"
+                             + "target feature")
 
-    def __str__(self):
+    def __str__(self) -> None:
+        """
+        String representation of the class.
+
+        Argument:
+            None
+
+        Returns:
+            None
+        """
         return f"""
-Pipeline(
+    Pipeline(
     model={self._model.type},
     input_features={list(map(str, self._input_features))},
     target_feature={str(self._target_feature)},
@@ -47,7 +73,16 @@ Pipeline(
 """
 
     @property
-    def model(self):
+    def model(self) -> Model:
+        """
+        Return Model that is in the pipeline.
+
+        Argument:
+            None
+
+        Returns:
+            Model in the pipeline.
+        """
         return self._model
 
     @property
@@ -78,10 +113,20 @@ Pipeline(
             self._model.to_artifact(name=f"pipeline_model_{self._model.type}"))
         return artifacts
 
-    def _register_artifact(self, name: str, artifact):
+    def _register_artifact(self, name: str, artifact: Artifact) -> None:
+        """"
+        Registers artifact to an dictionary of artifacts.
+
+        Agruments:
+            name (str): Name od the artifact to be registered.
+            artifact (Artifact): artifact that is to be registered.
+
+        Returns:
+            None
+        """
         self._artifacts[name] = artifact
 
-    def _preprocess_features(self):
+    def _preprocess_features(self) -> None:
         (target_feature_name, target_data, artifact) = preprocess_features(
             [self._target_feature], self._dataset)[0]
         self._register_artifact(target_feature_name, artifact)
@@ -95,27 +140,27 @@ Pipeline(
         self._input_vectors = [data for (feature_name, data, artifact)
                                in input_results]
 
-    def _split_data(self):
+    def _split_data(self) -> None:
         # Split the data into training and testing sets
         split = self._split
         self._train_X = [vector[:int(split * len(vector))] for vector
                          in self._input_vectors]
         self._test_X = [vector[int(split * len(vector)):] for vector
                         in self._input_vectors]
-        self._train_y = self._output_vector[:int(split *
-                                                 len(self._output_vector))]
-        self._test_y = self._output_vector[int(split *
-                                               len(self._output_vector)):]
+        self._train_y = self._output_vector[
+            :int(split * len(self._output_vector))]
+        self._test_y = self._output_vector[
+            int(split * len(self._output_vector)):]
 
     def _compact_vectors(self, vectors: List[np.array]) -> np.array:
         return np.concatenate(vectors, axis=1)
 
-    def _train(self):
+    def _train(self) -> None:
         X = self._compact_vectors(self._train_X)
         Y = self._train_y
         self._model.fit(X, Y)
 
-    def _evaluate(self):
+    def _evaluate(self) -> None:
         X = self._compact_vectors(self._test_X)
         Y = self._test_y
         self._metrics_results = []
@@ -125,7 +170,16 @@ Pipeline(
             self._metrics_results.append((metric, result))
         self._predictions = predictions
 
-    def execute(self):
+    def execute(self) -> dict[str: list | any]:
+        """
+        Executes the pipiline setup.
+
+        Arguments:
+            None
+
+        Returns:
+            dictionary of metrics with results and the prediction.
+        """
         self._preprocess_features()
         self._split_data()
         self._train()
