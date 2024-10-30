@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 # TODO: Unsure what to use typing for
-from typing import Any
 import numpy as np
 
 METRICS = [
@@ -76,7 +75,7 @@ class Metric(ABC):
 class MeanSquaredError(Metric):
     """Mean Squared Error metric implementation for regression."""
 
-    def __call__(self, truth: np.ndarray, pred: np.ndarray):
+    def __call__(self, truth: np.ndarray, pred: np.ndarray) -> float:
         """
         Calculate mean Squared error.
 
@@ -147,7 +146,7 @@ class RSquared(Metric):
 class Accuracy(Metric):
     """Accuracy metric implementation for classification."""
 
-    def __call__(self, truth: np.ndarray, pred: np.ndarray):
+    def __call__(self, truth: np.ndarray, pred: np.ndarray) -> float:
         """
         Calculate accuracy.
 

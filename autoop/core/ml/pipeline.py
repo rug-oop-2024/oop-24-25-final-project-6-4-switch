@@ -46,11 +46,12 @@ class Pipeline():
         self._split = split
         if (target_feature.type == "categorical"
                 and model.type != "classification"):
-            raise ValueError("Model type must be classification for"
-                             + "categorical target feature")
+            raise ValueError(
+                "Model type must be classification for"
+                + "categorical target feature")
         if target_feature.type == "continuous" and model.type != "regression":
-            raise ValueError("Model type must be regression for continuous"
-                             + "target feature")
+            raise ValueError(
+                "Model type must be regression for continuous target feature")
 
     def __str__(self) -> None:
         """
@@ -114,7 +115,7 @@ class Pipeline():
         return artifacts
 
     def _register_artifact(self, name: str, artifact: Artifact) -> None:
-        """"
+        """
         Registers artifact to an dictionary of artifacts.
 
         Agruments:
