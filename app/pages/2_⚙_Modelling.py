@@ -7,6 +7,9 @@ from autoop.core.ml.feature import Feature
 from autoop.core.ml.model.model import Model
 from autoop.functional.feature import detect_feature_types
 from app.modelling.models import get_models
+from app.modelling.get_metric import get_metrics
+from autoop.core.ml.pipeline import Pipeline
+from autoop.core.ml.metric import Metric
 
 
 st.set_page_config(page_title="Modelling", page_icon="📈")
@@ -61,4 +64,21 @@ else:
 st.write(f"Detected task type is {task_type}.")
 
 if target_colum is not None:
+    split: float = st.slider("Slect split in dataset.",
+                             min_value=0.1,
+                             max_value=1,
+                             value=0.8)
+
     model: Model = st.selectbox("select model.", get_models(task_type))
+    metrics: list[Metric] = st.multiselect("select metrics.",
+                                           get_metrics(task_type))
+
+    pipeline: Pipeline = Pipeline(
+        metrics,
+        datasets[dataset_names.index(selected_dataset)],
+        model,
+        input_features,
+        target_colum,
+        split
+        )
+    
