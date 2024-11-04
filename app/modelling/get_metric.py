@@ -6,8 +6,7 @@ from autoop.core.ml.metric import (
     RSquared,
     Accuracy,
     Precision,
-    LogLoss
-    )
+    LogLoss)
 
 
 def get_metrics(type: Literal["regresion", "classification"]) -> list[Metric]:

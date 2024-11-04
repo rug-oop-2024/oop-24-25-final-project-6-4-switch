@@ -80,8 +80,7 @@ if target_colum is not None:
             model,
             input_features,
             target_colum,
-            split
-            )
+            split)
 
         st.write(pipeline)
 
