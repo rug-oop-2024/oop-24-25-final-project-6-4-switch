@@ -66,7 +66,7 @@ st.write(f"Detected task type is {task_type}.")
 if target_colum is not None:
     split: float = st.slider("Slect split in dataset.",
                              min_value=0.1,
-                             max_value=1,
+                             max_value=0.9,
                              value=0.8)
 
     model: Model = st.selectbox("select model.", get_models(task_type))
