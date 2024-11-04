@@ -173,8 +173,8 @@ If you did not implement the feature
 |`ST/modelling/pipeline/metrics`        |FN            |Jia Hao Zhang         |         |Not working yet but code is there due to missing linear regression |
 |`ST/modelling/pipeline/summary`        |FN            |Jia Hao Zhang         |         |Not working yet but code is there due to missing linear regression |
 |`ST/modelling/pipeline/train`          |FN            |Jia Hao Zhang         |         |Not working yet but code is there due to missing linear regression |
-|`ST/modelling/pipeline/save`           |FN            |                      |         | |
-|`ST/page/deployment`                   |FN            |                      |         | |
+|`ST/modelling/pipeline/save`           |FN            |Jia Hao Zhang         |         |Not working yet but code is there due to missing linear regression |
+|`ST/page/deployment`                   |FN            |Jia Hao Zhang         |         | |
 |`ST/deployment/load`                   |FN            |                      |         | |
 |`ST/deployment/predict`                |FN            |                      |         | |
 
