@@ -93,6 +93,7 @@ class Pipeline():
         execution to be saved
         """
         artifacts = []
+
         for name, artifact in self._artifacts.items():
             artifact_type = artifact.get("type")
             if artifact_type in ["OneHotEncoder"]:
@@ -103,6 +104,7 @@ class Pipeline():
                 data = artifact["scaler"]
                 data = pickle.dumps(data)
                 artifacts.append(Artifact(name=name, data=data))
+
         pipeline_data = {
             "input_features": self._input_features,
             "target_feature": self._target_feature,

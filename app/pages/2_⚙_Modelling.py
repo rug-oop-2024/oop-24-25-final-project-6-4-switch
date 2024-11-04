@@ -92,3 +92,9 @@ if target_colum is not None:
             st.write(
                 "predictionss of the pipeline:"
                 + f"{pipeline_result['predictions']}")
+
+            if st.button("Save pipeline?"):
+                for artifact in pipeline.artifacts:
+                    automl.register(artifact)
+
+                st.write("Saved.")
