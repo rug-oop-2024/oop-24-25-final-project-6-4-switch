@@ -110,4 +110,3 @@ if target_colum is not None:
                     automl.registry.register(artifact)
 
                 st.write('Pipeline saved')
-
