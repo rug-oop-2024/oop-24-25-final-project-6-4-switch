@@ -1,13 +1,12 @@
 from typing import TYPE_CHECKING
 from app.core.system import AutoMLSystem
-from autoop.core.ml.pipeline import Pipeline
 import pickle
 import streamlit as st
 
 if TYPE_CHECKING:
     from autoop.core.ml.artifact import Artifact
 
-automl: AutoMLSystem = AutoMLSystem.get_instance
+automl: AutoMLSystem = AutoMLSystem.get_instance()
 
 st.set_page_config(page_title="Deployment")
 
@@ -30,6 +29,7 @@ if current_pipeline is not None:
             input_feature = pickle.loads(artifact.read)["input_features"]
 
     predict_data: list[int | float | str] = []
+
     for name, type in [(feature.name, feature.type) for
                        feature in input_feature]:
         if type == "numerical":
