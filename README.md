@@ -153,18 +153,18 @@ If you did not implement the feature
 
 | Requirement                           | Type (FN/NF) | Implemented by       | Implementation Completed (add X if done) | Comment |
 |-------------------------------------- |--------------|----------------------|------------------------------------------|---------|
-|`Up-to-date requirements.txt`          |NF            |Jia Hao Zhang         |x                                         |Only the base packages(15-10-2024)|
-|`ML/detect-features`                   |FN            |Jia Hao Zhang         |x|Only garentee to work for the premade test.|
-|`ML/artifact`                          |NF            |Jia Hao Zhang         |x|Added atributes that were in instructions into the class, without breaking detect feature. Not garrenteed to work on other situations.|
-|`ML/feature`                           |NF            |Jia Hao Zhang         |x| Made type in feature a literal to make sure the user complies tih the two types of data. the class is only garenteed to work with test feature detect and no other processes.|
-|`ML/metric`                            |NF            |Marcus Persson        |x|Need to determine if typing is needed.|
-|`ML/metric/extensions`                 |FN            |Marcus Persson        |x||
-|`ML/model`                             |NF            |Marcus Persson        |         | |
+|`Up-to-date requirements.txt`          |NF            |Both|X                                        |Reflected for Linux and Windows|
+|`ML/detect-features`                   |FN            |Both|X||
+|`ML/artifact`                          |FN            |Both|X||
+|`ML/feature`                           |NF            |Both|X||
+|`ML/metric`                            |FN            |Marcus Persson        |X||
+|`ML/metric/extensions`                 |FN            |Marcus Persson        |X|"mean_squared_error", "mean_absolute_error", "r_squared", "accuracy", "precision","log_loss"|
+|`ML/model`                             |NF            |Marcus Persson        ||Partial implementation (?). Will re-evaluate if there are more needs.|
 |`ML/model/extensions`                  |FN            |Marcus Persson        |         | |
 |`ML/pipeline/evaluation`               |FN            |Marcus Persson        |         | |
 | `ST/page/datasets`                    |NF            |Jia Hao Zhang         |X        |Basic dataset viewing and saving seems to work.|
 | `ST/datasets/management/create`       |FN            |Jia Hao Zhang         |X        |it does create new dataset fro now. needs more testing and seeing how to do it properly later.|
-|`ST/datasets/management/save`          |FN            |Jia Hao Zhang         |x        |It saves the dataset. no idea if it properly done. only confirmed to that you can get to the data from dataset class data for previewing. |
+|`ST/datasets/management/save`          |FN            |Jia Hao Zhang         |X        |It saves the dataset. no idea if it properly done. only confirmed to that you can get to the data from dataset class data for previewing. |
 |`ST/page/modelling`                    |NF            |Jia Hao Zhang         |X        |partially done. |
 |`ST/modelling/datasets/list`           |FN            |Jia Hao Zhang         |X        |made this feature to turn artifacts into datasets|
 |`ST/modelling/datasets/features`       |FN            |Jia Hao Zhang         |X        |Just used the detect features directly instead of making a new wrapper. |
