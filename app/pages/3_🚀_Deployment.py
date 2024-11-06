@@ -27,12 +27,16 @@ if current_pipeline is not None:
     for artifact in pipeline_artifact:
         if artifact.name == "pipeline_config":
             input_feature = pickle.loads(artifact.read)["input_features"]
+        if "pipeline_model" in artifact.name:
+            model_artifact = artifact
 
-    predict_data: list[int | float | str] = []
+    predict_data_file = st.file_uploader(
+        label=f"CSV shouls include as input feature: {input_feature}",
+        accept_multiple_files=False,
+        type=["csv"])
 
-    for name, type in [(feature.name, feature.type) for
-                       feature in input_feature]:
-        if type == "numerical":
-            predict_data.append(st.number_input(name))
-        else:
-            predict_data.append(st.text_input(name))
+    # turn model artifact into model
+
+    # input the new csv data in the model
+
+    # get model prediction and display to user.
