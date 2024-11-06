@@ -117,8 +117,7 @@ class Pipeline():
         return artifacts
 
     def _register_artifact(self, name: str, artifact: Artifact) -> None:
-        """
-        Registers artifact to an dictionary of artifacts.
+        """Registers artifact to an dictionary of artifacts.
 
         Agruments:
             name (str): Name od the artifact to be registered.
@@ -174,8 +173,7 @@ class Pipeline():
         self._predictions = predictions
 
     def execute(self) -> dict[str: list | any]:
-        """
-        Executes the pipiline setup.
+        """Executes the pipiline setup.
 
         Arguments:
             None
