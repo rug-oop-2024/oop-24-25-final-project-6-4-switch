@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union, Any
 import pickle
 
 from autoop.core.ml.artifact import Artifact
@@ -172,12 +172,10 @@ class Pipeline():
             self._metrics_results.append((metric, result))
         self._predictions = predictions
 
-    def execute(self) -> dict[str: list | any]:
+    def execute(self) -> dict[str: Union[List, Any]]:
         """Executes the pipiline setup.
-
-        Arguments:
+        Args:
             None
-
         Returns:
             dictionary of metrics with results and the prediction.
         """
