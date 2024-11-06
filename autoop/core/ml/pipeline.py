@@ -1,4 +1,4 @@
-from typing import List, Union, Any
+from typing import List, Union, Any, Dict
 import pickle
 
 from autoop.core.ml.artifact import Artifact
@@ -172,7 +172,7 @@ class Pipeline():
             self._metrics_results.append((metric, result))
         self._predictions = predictions
 
-    def execute(self) -> dict[str: Union[List, Any]]:
+    def execute(self) -> Dict[str, Union[List, Any]]:
         """
         Executes the full machine learning workflow including preprocessing,
         data splitting, training, and evaluation.
