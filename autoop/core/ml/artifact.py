@@ -43,3 +43,8 @@ class Artifact(BaseModel):
             id (str): str id of the artifact.
         """
         return f"{base64.b64encode(self.asset_path.encode())}:{self.version}"
+
+    def get(self, name: str) -> str:
+        match name:
+            case "type":
+                return self.type
