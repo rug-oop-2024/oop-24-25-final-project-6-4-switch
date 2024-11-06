@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union, Any, Dict
 import pickle
 
 from autoop.core.ml.artifact import Artifact
@@ -93,6 +93,7 @@ class Pipeline():
         execution to be saved
         """
         artifacts = []
+
         for name, artifact in self._artifacts.items():
             artifact_type = artifact.get("type")
             if artifact_type in ["OneHotEncoder"]:
@@ -103,6 +104,7 @@ class Pipeline():
                 data = artifact["scaler"]
                 data = pickle.dumps(data)
                 artifacts.append(Artifact(name=name, data=data))
+
         pipeline_data = {
             "input_features": self._input_features,
             "target_feature": self._target_feature,
@@ -115,8 +117,7 @@ class Pipeline():
         return artifacts
 
     def _register_artifact(self, name: str, artifact: Artifact) -> None:
-        """
-        Registers artifact to an dictionary of artifacts.
+        """Registers artifact to an dictionary of artifacts.
 
         Agruments:
             name (str): Name od the artifact to be registered.
@@ -171,15 +172,22 @@ class Pipeline():
             self._metrics_results.append((metric, result))
         self._predictions = predictions
 
-    def execute(self) -> dict[str: list | any]:
+    def execute(self) -> Dict[str, Union[List, Any]]:
         """
-        Executes the pipiline setup.
+        Executes the full machine learning workflow including preprocessing,
+        data splitting, training, and evaluation.
 
-        Arguments:
-            None
+        This method performs the following steps:
+        1. Preprocesses features required for training.
+        2. Splits the data into training and test sets.
+        3. Trains the model on the training data.
+        4. Evaluates the model on the test set.
 
         Returns:
-            dictionary of metrics with results and the prediction.
+            dict: A dictionary containing:
+                - "metrics" (Any): The evaluation metrics for the model.
+                - "predictions" (List): The model's predictions on the test
+                set.
         """
         self._preprocess_features()
         self._split_data()
