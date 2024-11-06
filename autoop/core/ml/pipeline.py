@@ -173,11 +173,21 @@ class Pipeline():
         self._predictions = predictions
 
     def execute(self) -> dict[str: Union[List, Any]]:
-        """Executes the pipiline setup.
-        Args:
-            None
+        """
+        Executes the full machine learning workflow including preprocessing,
+        data splitting, training, and evaluation.
+
+        This method performs the following steps:
+        1. Preprocesses features required for training.
+        2. Splits the data into training and test sets.
+        3. Trains the model on the training data.
+        4. Evaluates the model on the test set.
+
         Returns:
-            dictionary of metrics with results and the prediction.
+            dict: A dictionary containing:
+                - "metrics" (Any): The evaluation metrics for the model.
+                - "predictions" (List): The model's predictions on the test
+                set.
         """
         self._preprocess_features()
         self._split_data()
