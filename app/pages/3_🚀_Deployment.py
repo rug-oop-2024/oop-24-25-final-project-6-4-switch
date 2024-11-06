@@ -11,4 +11,10 @@ st.set_page_config(page_title="Deployment")
 
 st.title("Deployment")
 
-piplines: list["Artifact"] = automl.registry.list()
+piplines: list["Artifact"] = automl.registry.list(type="pipeline")
+
+current_pipeline = st.selectbox("select pipeline",
+                                [Artifact.name for artifact in piplines])
+
+if current_pipeline is not None:
+    pass
