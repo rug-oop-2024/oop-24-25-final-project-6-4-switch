@@ -3,7 +3,9 @@ import base64
 
 
 class Artifact(BaseModel):
-    """Artifact.
+    """
+    Artifact.
+
     Atributes:
         name (str): name of artifect.
         asset_path (str): path of the asset.
