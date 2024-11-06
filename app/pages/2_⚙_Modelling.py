@@ -10,6 +10,7 @@ from app.modelling.models import get_models
 from app.modelling.get_metric import get_metrics
 from autoop.core.ml.pipeline import Pipeline
 from autoop.core.ml.metric import Metric
+from app.modelling.save import save_pipeline
 
 
 st.set_page_config(page_title="Modelling", page_icon="📈")
@@ -93,8 +94,20 @@ if target_colum is not None:
                 "predictionss of the pipeline:"
                 + f"{pipeline_result['predictions']}")
 
-            if st.button("Save pipeline?"):
-                for artifact in pipeline.artifacts:
-                    automl.register(artifact)
+            version = st.text_input("version number of dataset.",
+                                    help="format is 1.1.1")
+            pipeline_name = st.text_input("name of the pipeline")
 
-                st.write("Saved.")
+            if (st.button("save Pipeline?")
+                    and (version == "" or len(version.split(".")) == 3)
+                    and pipeline_name is not None):
+                central_pipeline_artifact = save_pipeline(pipeline,
+                                                          version,
+                                                          pipeline_name)
+
+                automl.registry.register(central_pipeline_artifact)
+                for artifact in pipeline.artifacts:
+                    automl.registry.register(artifact)
+
+                st.write('Pipeline saved')
+
