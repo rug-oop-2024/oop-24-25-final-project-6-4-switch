@@ -13,7 +13,5 @@ class Feature(BaseModel):
     type: Literal["numerical", "categorical"] = Field()
 
     def __str__(self) -> None:
-        """
-        String representation of feature class
-        """
+        
         return f"Column {self.name} is {self.type}"

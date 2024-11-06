@@ -41,7 +41,14 @@ class Database():
         return entry
 
     def get(self, collection: str, id: str) -> Union[dict, None]:
-        
+        """Get a key from the database
+        Args:
+            collection (str): The collection to get the data from
+            id (str): The id of the data
+        Returns:
+            Union[dict, None]: The data that was stored, or None if it doesn't
+            exist
+        """
         if not self._data.get(collection, None):
             return None
         return self._data[collection].get(id, None)
