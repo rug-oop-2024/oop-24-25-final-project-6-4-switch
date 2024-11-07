@@ -22,8 +22,10 @@ class LogisticRegression(Model):
         None
         """
         super().__init__()
-        self.hyper_parameters["learning_rate"] = learning_rate
-        self.hyper_parameters["iterations"] = iterations
+        self.hyper_parameters = {
+            "learning_rate": learning_rate,
+            "iterations": iterations
+        }
         self._weights = None
         self._bias = 0
 

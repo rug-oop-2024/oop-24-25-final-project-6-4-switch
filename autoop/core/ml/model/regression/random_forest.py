@@ -23,8 +23,10 @@ class RandomForest(Model):
         """
         super().__init__()
         self._decision_tree = DecisionTreeRegressor()
-        self.hyper_parameters["trees"] = trees
-        self.hyper_parameters["depth"] = depth
+        self.hyper_parameters = {
+            "trees": trees,
+            "depth": depth
+        }
         self.trees = []
 
     def fit(self, features: np.ndarray, labels: np.ndarray) -> None:

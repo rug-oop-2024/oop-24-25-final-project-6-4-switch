@@ -19,7 +19,7 @@ class MultipleLinearRegression(Model):
         None
         """
         super().__init__()
-        self.hyper_parameters["alpha"] = alpha
+        self.hyper_parameters = {"alpha": alpha}
 
     def fit(self, features: np.ndarray, labels: np.ndarray) -> None:
         """
@@ -44,7 +44,7 @@ class MultipleLinearRegression(Model):
         except np.linalg.LinAlgError:
             raise np.linalg.LinAlgError("Matrix is not invertible with the" +
                                         "added one column at the end.")
-        self._parameters["weights"] = inversed_matrix @ squiggle.T @ labels
+        self.parameters = {"weights": inversed_matrix @ squiggle.T @ labels}
 
     def predict(self, features: np.ndarray) -> np.ndarray:
         """
@@ -65,14 +65,14 @@ class MultipleLinearRegression(Model):
                              "Please call the fit method first.")
 
         if features.ndim == 1:
-            observations = features.reshape(1, -1)
+            features = features.reshape(1, -1)
 
-        observations_bias = np.c_[observations, np.ones(observations.shape[0])]
+        bias = np.c_[features, np.ones(features.shape[0])]
 
-        _, column = observations_bias.shape
-        coef_row, _ = self.parameters["coef"].shape
+        _, column = bias.shape
+        coef_row, _ = self.parameters["weights"].shape
 
         if column != coef_row:
             raise ValueError("Wrong size for the ndarray.")
 
-        return observations_bias @ self.parameters["weights"]
+        return bias @ self.parameters["weights"]

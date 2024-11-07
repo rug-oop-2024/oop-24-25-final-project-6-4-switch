@@ -3,16 +3,16 @@ from autoop.core.ml.artifact import Artifact
 import numpy as np
 from copy import deepcopy
 from typing import Literal, Any
-from pydantic import Field
+from pydantic import PrivateAttr
 
 
 class Model(ABC, Artifact):
     """Base class for regression and clasification models."""
 
-    _parameters: dict = Field(default={np.ndarray})
-    _hyper_parameters: dict = Field(default={float})
+    _parameters: dict = PrivateAttr(default={})
+    _hyper_parameters: dict = PrivateAttr(default={})
 
-    def __init__():
+    def __init__(self):
         """
         Initialize model.
 
@@ -83,6 +83,8 @@ class Model(ABC, Artifact):
         -------
         None
         """
+        if not isinstance(parameters, dict):
+            raise TypeError("Parameters must be a dictionary.")
         self._parameters = parameters
 
     @property
@@ -111,6 +113,8 @@ class Model(ABC, Artifact):
         -------
         None
         """
+        if not isinstance(hyper_parameters, dict):
+            raise TypeError("Hyperparameters must be a dictionary.")
         self._hyper_parameters = hyper_parameters
 
     # TODO: Encode to base64 bytes for data
@@ -131,6 +135,6 @@ class Model(ABC, Artifact):
         
 
         self.data = {
-            "parameters": self.parameters,
-            "hyperparameters": self.hyper_parameters
+            "parameters": self._parameters,
+            "hyperparameters": self._hyper_parameters
         }

@@ -23,7 +23,7 @@ class DecisionTree(Model):
         None
         """
         super().__init__()
-        self.hyper_parameters["depth"] = depth
+        self.hyper_parameters = {"depth": depth}
         self._tree = DecisionTreeRegressor(max_depth=depth)
 
     def fit(self, features: np.ndarray, labels: np.ndarray) -> None:
