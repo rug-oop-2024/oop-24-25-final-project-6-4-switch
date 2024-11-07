@@ -1,19 +1,28 @@
-
 from pydantic import BaseModel, Field
 from typing import Literal
 
 
 class Feature(BaseModel):
-    """Feature.
-        name (str): name of feature.
-        type (str): type of feature.
     """
-    # attributes here
-    name: str = Field()
-    type: Literal["numerical", "categorical"] = Field()
+    Feature class representing a feature in a ML model.
+
+    Attributes
+    ----------
+    name : str
+        Name of feature.
+    type : str
+        Type of feature.
+    """
+    name: str = Field(..., description="The name of the feature.")
+    type: Literal["numerical", "categorical"] = \
+        Field(..., description="The type of feature")
 
     def __str__(self) -> None:
         """
-        String representation of feature class
+        Return string representation of the feature class.
+
+        Returns
+        -------
+        None
         """
-        return f"Column {self.name} is {self.type}"
+        return f"Feature \"{self.name}\" is of type {self.type}."

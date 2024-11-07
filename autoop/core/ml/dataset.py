@@ -32,7 +32,7 @@ class Dataset(Artifact):
         csv = bytes.decode()
         return pd.read_csv(io.StringIO(csv))
 
-    def save(self, data: pd.DataFrame) -> bytes:
+    def save_artifact(self, data: pd.DataFrame) -> bytes:
         """ Save data to a given path """
         bytes = data.to_csv(index=False).encode()
-        return super().save(bytes)
+        return super().save_artifact(bytes)

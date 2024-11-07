@@ -168,13 +168,13 @@ class Pipeline():
         self._metrics_results = []
         predictions = self._model.predict(X)
         for metric in self._metrics:
-            result = metric.evaluate(predictions, Y)
+            result = metric(predictions, Y)
             self._metrics_results.append((metric, result))
         self._predictions = predictions
 
     def execute(self) -> Dict[str, Union[List, Any]]:
         """
-        Executes the full machine learning workflow including preprocessing,
+        Execute the full machine learning workflow including preprocessing,
         data splitting, training, and evaluation.
 
         This method performs the following steps:
@@ -183,17 +183,29 @@ class Pipeline():
         3. Trains the model on the training data.
         4. Evaluates the model on the test set.
 
-        Returns:
-            dict: A dictionary containing:
-                - "metrics" (Any): The evaluation metrics for the model.
-                - "predictions" (List): The model's predictions on the test
-                set.
+        Returns
+        -------
+        dict[str, Union[List, Any]]
+            A dictionary containing the training and evaluation metrics of the
+            model, and the model's predictions on the test.
         """
         self._preprocess_features()
         self._split_data()
         self._train()
+
+        train_x = self._compact_vectors(self._train_X)
+        train_y = self._train_y
+        train_predictions = self.model.predict(train_x)
+        train_metric_results = []
+
+        for metric in self._metrics:
+            train_result = metric(train_predictions, train_y)
+            train_metric_results.append((metric, train_result))
+
         self._evaluate()
+
         return {
+            "train_metrics": train_metric_results,
             "metrics": self._metrics_results,
-            "predictions": self._predictions,
+            "predictions": self._predictions
         }

@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-# TODO: Unsure what to use typing for
 import numpy as np
 
 METRICS = [
@@ -25,8 +24,8 @@ def get_metric(name: str) -> "Metric":
 
     Returns
     -------
-    any
-        Metric instance matching name.
+    Metric
+        Metric instance matching the name.
 
     Raises
     ------
@@ -45,7 +44,7 @@ def get_metric(name: str) -> "Metric":
         except TypeError:
             raise NotImplementedError(f"{class_name} is not implemented.")
     else:
-        raise ValueError(f"{class_name} is possibly mispelt.")
+        raise ValueError(f"{name} is possibly mispelt.")
 
 
 class Metric(ABC):
@@ -59,7 +58,7 @@ class Metric(ABC):
         Parameters
         ----------
         truth : ndarray
-            Grouth truth values.
+            Ground truth values.
         pred : ndarray
             Predicted values.
 
@@ -82,7 +81,7 @@ class MeanSquaredError(Metric):
         Parameters
         ----------
         truth : ndarray
-            Grouth truth values.
+            Ground truth values.
         pred : ndarray
             Predicted values.
 
@@ -104,7 +103,7 @@ class MeanAbsoluteError(Metric):
         Parameters
         ----------
         truth : ndarray
-            Grouth truth values.
+            Ground truth values.
         pred : ndarray
             Predicted values.
 
@@ -126,7 +125,7 @@ class RSquared(Metric):
         Parameters
         ----------
         truth : ndarray
-            Grouth truth values.
+            Ground truth values.
         pred : ndarray
             Predicted values.
 
@@ -153,7 +152,7 @@ class Accuracy(Metric):
         Parameters
         ----------
         truth : ndarray
-            Grouth truth values.
+            Ground truth values.
         pred : ndarray
             Predicted values.
 
@@ -175,7 +174,7 @@ class Precision(Metric):
         Parameters
         ----------
         truth : ndarray
-            Grouth truth values.
+            Ground truth values.
         pred : ndarray
             Predicted values.
 
@@ -200,7 +199,7 @@ class LogLoss(Metric):
         Parameters
         ----------
         truth : ndarray
-            Grouth truth values.
+            Ground truth values.
         pred : ndarray
             Predicted values.
 
