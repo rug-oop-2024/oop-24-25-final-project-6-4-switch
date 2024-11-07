@@ -161,7 +161,7 @@ If you did not implement the feature
 |`ML/metric/extensions`                 |FN            |Marcus Persson        |X|"mean_squared_error", "mean_absolute_error", "r_squared", "accuracy", "precision","log_loss"|
 |`ML/model`                             |NF            |Marcus Persson        |~|Implementation (?). Will re-evaluate if there are more needs.|
 |`ML/model/extensions`                  |FN            |Marcus Persson        |~|Need to double-check if everything works. "k_nearest_neighbors", "linear_discriminant_analysis", "logistic_regression", "decision_tree", "multiple_linear_regression","random_forest"|
-|`ML/pipeline/evaluation`               |FN            |Marcus Persson        |         | |
+|`ML/pipeline/evaluation`               |FN            |Marcus Persson        |X|All good. Pipeline tests work.|
 | `ST/page/datasets`                    |NF            |Jia Hao Zhang         |X        |Basic dataset viewing and saving seems to work.|
 | `ST/datasets/management/create`       |FN            |Jia Hao Zhang         |X        |it does create new dataset fro now. needs more testing and seeing how to do it properly later.|
 |`ST/datasets/management/save`          |FN            |Jia Hao Zhang         |X        |It saves the dataset. no idea if it properly done. only confirmed to that you can get to the data from dataset class data for previewing. |
