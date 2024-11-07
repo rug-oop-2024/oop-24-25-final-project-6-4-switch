@@ -1,5 +1,5 @@
-from autoop.core.ml.model.classification.gradient_boosting import (
-    GradientBoosting
+from autoop.core.ml.model.classification.linear_discriminant_analysis import (
+    LinearDiscriminantAnalysis
 )
 from autoop.core.ml.model.classification.k_nearest_neighbors import (
     KNearestNeighbors

@@ -5,15 +5,21 @@ from autoop.core.ml.model.model import Model
 class MultipleLinearRegression(Model):
     """Class of multiple linear regression model."""
 
-    def __init__():
+    def __init__(self, alpha: float = 0.0):
         """
         Initialize model.
+
+        Parameters
+        ----------
+        alpha : float
+            Regularisation strength.
 
         Returns
         -------
         None
         """
         super().__init__()
+        self.hyper_parameters["alpha"] = alpha
 
     def fit(self, features: np.ndarray, labels: np.ndarray) -> None:
         """
@@ -31,9 +37,10 @@ class MultipleLinearRegression(Model):
         None
         """
         squiggle = np.c_[features, np.ones(features.shape[0])]
+        alpha = self.hyper_parameters["alpha"]
 
         try:
-            inversed_matrix = np.linalg.inv(squiggle.T @ squiggle)
+            inversed_matrix = np.linalg.inv(squiggle.T @ squiggle + alpha)
         except np.linalg.LinAlgError:
             raise np.linalg.LinAlgError("Matrix is not invertible with the" +
                                         "added one column at the end.")

@@ -42,20 +42,35 @@ class RandomForest(Model):
         -------
         None
         """
-        trees = self.hyper_parameters["trees"]
+        length = self.hyper_parameters["trees"]
+        self.trees.append(self._fit_single(features, labels)
+                          for _ in range(length))
+
+    def _fit_single(self, features: np.ndarray, labels: np.ndarray) \
+            -> "DecisionTreeRegressor":
+        """
+        Fit the model individually.
+
+        Parameters
+        ----------
+        features : ndarray
+            Training features.
+        labels : ndarray
+            Training labels.
+
+        Returns
+        -------
+        None
+        """
         depth = self.hyper_parameters["depth"]
+        indices = np.random.choice(features.shape[0], features.shape[0],
+                                   replace=True)
+        sample_features = features[indices]
+        sample_labels = labels[indices]
 
-        for _ in range(trees):
-            indices = np.random.choice(features.shape[0], features.shape[0],
-                                       replace=True)
-            sample_features = features[indices]
-            sample_labels = labels[indices]
+        tree = DecisionTreeRegressor(max_depth=depth)
 
-            tree = DecisionTreeRegressor(max_depth=depth)
-
-            # Train the tree on the sampled data
-            tree.fit(sample_features, sample_labels)
-            self.trees.append(tree)
+        return tree.fit(sample_features, sample_labels)
 
     def predict(self, features: np.ndarray) -> np.ndarray:
         """

@@ -40,6 +40,7 @@ class KNearestNeighbors(Model):
         self.parameters["features"] = features
         self.parameters["labels"] = labels
 
+    # TODO: Return nparray for simplicity
     def predict(self, features: np.ndarray) -> list[np.str_]:
         """
         Make predictions using the fitted model.

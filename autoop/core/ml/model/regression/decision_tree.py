@@ -4,7 +4,10 @@ from sklearn.tree import DecisionTreeRegressor
 
 
 class DecisionTree(Model):
-    """Class of decision tree model."""
+    """
+    Class of decision tree model, using the DecisionTreeRegressor module from
+    scikit.
+    """
 
     def __init__(self, depth: int = None) -> None:
         """

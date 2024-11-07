@@ -1,11 +1,11 @@
 from autoop.core.ml.model.model import Model
 from autoop.core.ml.model.regression import (
     DecisionTree,
-    MultipleLinearRegression, 
+    MultipleLinearRegression,
     RandomForest
 )
 from autoop.core.ml.model.classification import (
-    GradientBoosting,
+    LinearDiscriminantAnalysis,
     KNearestNeighbors,
     LogisticRegression
 )
@@ -53,13 +53,13 @@ def get_model(model_name: str) -> "Model":
                     return MultipleLinearRegression()
                 case "random_forest":
                     return RandomForest()
-                case "gradient_boosting":
-                    return GradientBoosting()
+                case "linear_discriminant_analysis":
+                    return LinearDiscriminantAnalysis()
                 case "k_nearest_neighbors":
                     return KNearestNeighbors()
                 case "logistic_regression":
                     return LogisticRegression()
-        except NotImplementedError:
+        except TypeError:
             class_name: str = \
                 ''.join(word.capitalize() for word in model_name.split('_'))
             raise NotImplementedError(f"{class_name} is not implemented.")

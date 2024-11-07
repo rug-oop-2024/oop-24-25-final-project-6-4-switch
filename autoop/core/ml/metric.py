@@ -41,7 +41,7 @@ def get_metric(name: str) -> "Metric":
         try:
             # Return class
             return globals()[class_name]()
-        except NotImplementedError:
+        except TypeError:
             raise NotImplementedError(f"{class_name} is not implemented.")
     else:
         raise ValueError(f"{name} is possibly mispelt.")

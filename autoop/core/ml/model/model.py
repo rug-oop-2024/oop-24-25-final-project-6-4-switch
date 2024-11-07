@@ -15,7 +15,7 @@ class Model(ABC, Artifact):
     def __init__():
         """
         Initialize model.
-        
+
         Returns
         -------
         None
@@ -61,7 +61,7 @@ class Model(ABC, Artifact):
     def parameters(self) -> dict[str: np.ndarray]:
         """
         Get strict parameters essential for prediction.
-        
+
         Returns
         -------
         dict[str: ndarray]
@@ -73,7 +73,7 @@ class Model(ABC, Artifact):
     def parameters(self, parameters: dict[str: np.ndarray]) -> None:
         """
         Set strict parameters.
-        
+
         Parameters
         ----------
         parameters : dict[str: ndarray]
@@ -89,7 +89,7 @@ class Model(ABC, Artifact):
     def hyper_parameters(self) -> dict[str: float]:
         """
         Get hyperparameters useful for training.
-        
+
         Returns
         -------
         dict[str: float]
@@ -97,7 +97,7 @@ class Model(ABC, Artifact):
         """
         return deepcopy(self._hyper_parameters)
 
-    @hyper_parameters
+    @hyper_parameters.setter
     def hyper_parameters(self, hyper_parameters: dict[str: float]) -> None:
         """
         Set hyperparameters.
