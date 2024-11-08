@@ -42,6 +42,7 @@ automl: AutoMLSystem = AutoMLSystem.get_instance()
 datasets: list[Dataset] = list_dataset(automl.registry.list(type="dataset"))
 
 # your code here
+# TODO test the classification models.
 
 selected_dataset = st.selectbox("Select dataset to model",
                                 datasets)
