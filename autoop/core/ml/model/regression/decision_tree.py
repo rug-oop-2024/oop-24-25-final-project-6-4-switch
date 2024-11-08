@@ -41,7 +41,8 @@ class DecisionTree(Model):
         -------
         None
         """
-        self.tree.fit(features, labels)
+        # TODO changed this to _tree
+        self._tree.fit(features, labels)
 
     def predict(self, features: np.ndarray) -> np.ndarray:
         """

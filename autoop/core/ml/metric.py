@@ -69,6 +69,21 @@ class Metric(ABC):
         """
         ...
 
+    @abstractmethod
+    def __str__(self) -> str:
+        """
+        String presentation of the metric.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        String of the repsensentation of this metric.
+        """
+        pass
+
 
 # region Regression
 class MeanSquaredError(Metric):
@@ -92,6 +107,20 @@ class MeanSquaredError(Metric):
         """
         return np.mean((truth - pred) ** 2)
 
+    def __str__(self) -> str:
+        """
+        String presentation of the metric.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        String of the repsensentation of this metric.
+        """
+        return "Mean Squared Error"
+
 
 class MeanAbsoluteError(Metric):
     """Mean Absolute Error (MAE) metric implementation for regression."""
@@ -113,6 +142,20 @@ class MeanAbsoluteError(Metric):
             Real number representing the metric value.
         """
         return np.mean(np.abs(truth - pred))
+
+    def __str__(self) -> str:
+        """
+        String presentation of the metric.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        String of the repsensentation of this metric.
+        """
+        return "Mean Absolute Error"
 
 
 class RSquared(Metric):
@@ -138,6 +181,20 @@ class RSquared(Metric):
         sum_total = np.sum((truth - np.mean(truth)) ** 2)
 
         return 1 - (sum_squares / sum_total)
+
+    def __str__(self) -> str:
+        """
+        String presentation of the metric.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        String of the repsensentation of this metric.
+        """
+        return "R Squared"
 # endregion
 
 
@@ -162,6 +219,20 @@ class Accuracy(Metric):
             Real number representing the metric value.
         """
         return np.mean(truth == pred)
+
+    def __str__(self) -> str:
+        """
+        String presentation of the metric.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        String of the repsensentation of this metric.
+        """
+        return "Accuracy"
 
 
 class Precision(Metric):
@@ -188,6 +259,20 @@ class Precision(Metric):
 
         return true_pos / (true_pos + false_pos)
 
+    def __str__(self) -> str:
+        """
+        String presentation of the metric.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        String of the repsensentation of this metric.
+        """
+        return "Precision"
+
 
 class LogLoss(Metric):
     """Logarithmic Loss implemenation for classication."""
@@ -213,4 +298,18 @@ class LogLoss(Metric):
 
         return -np.mean(truth * np.log(pred_clipped) + (1 - truth) *
                         np.log(1 - pred_clipped))
+
+    def __str__(self) -> str:
+        """
+        String presentation of the metric.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        String of the repsensentation of this metric.
+        """
+        return "Logloss"
 # endregion
