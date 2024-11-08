@@ -1,8 +1,20 @@
 from autoop.core.ml.model import Model
-from typing import Literal
+from autoop.core.ml.model.classification import (
+    KNearestNeighbors,
+    LinearDiscriminantAnalysis,
+    LogisticRegression
+)
+from autoop.core.ml.model.regression import (
+    DecisionTree,
+    MultipleLinearRegression,
+    RandomForest
+)
+
+from typing import Literal, Dict
 
 
-def get_models(type: Literal["regresion", "classification"]) -> list[Model]:
+def get_models(type: Literal["regresion",
+                             "classification"]) -> Dict[str, "Model"]:
     """
     Get list of models that fit the type of target feature.
 
@@ -14,6 +26,10 @@ def get_models(type: Literal["regresion", "classification"]) -> list[Model]:
     """
     match type:
         case "classification":
-            pass
+            return {"K Nearest Neighbors": KNearestNeighbors,
+                    "Lineat Descriminant Analysis": LinearDiscriminantAnalysis,
+                    "Logistic Regression": LogisticRegression}
         case "regresion":
-            pass
+            return {"Decision Tree": DecisionTree,
+                    "Mulriple Linear Regression": MultipleLinearRegression,
+                    "Random Forest": RandomForest}
