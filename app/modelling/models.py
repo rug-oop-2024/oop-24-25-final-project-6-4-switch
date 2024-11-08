@@ -31,5 +31,5 @@ def get_models(type: Literal["regresion",
                     "Logistic Regression": LogisticRegression}
         case "regresion":
             return {"Decision Tree": DecisionTree,
-                    "Mulriple Linear Regression": MultipleLinearRegression,
+                    "Multiple Linear Regression": MultipleLinearRegression,
                     "Random Forest": RandomForest}
