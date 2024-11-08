@@ -2,15 +2,18 @@ import streamlit as st
 
 from app.core.system import AutoMLSystem
 from app.datasets.list import list_dataset
-from autoop.core.ml.dataset import Dataset
-from autoop.core.ml.feature import Feature
-from autoop.core.ml.model.model import Model
-from autoop.functional.feature import detect_feature_types
+
 from app.modelling.models import get_models
 from app.modelling.get_metric import get_metrics
+from app.modelling.save import save_pipeline
+
+from autoop.core.ml.dataset import Dataset
+from autoop.core.ml.feature import Feature
 from autoop.core.ml.pipeline import Pipeline
 from autoop.core.ml.metric import Metric
-from app.modelling.save import save_pipeline
+from autoop.core.ml.model.model import Model
+
+from autoop.functional.feature import detect_feature_types
 
 
 st.set_page_config(page_title="Modelling", page_icon="📈")
@@ -39,19 +42,20 @@ automl: AutoMLSystem = AutoMLSystem.get_instance()
 datasets: list[Dataset] = list_dataset(automl.registry.list(type="dataset"))
 
 # your code here
-dataset_names: list[str] = [_.name for _ in datasets]
 
-selected_dataset = st.selectbox("Select dataset to model", dataset_names)
+selected_dataset = st.selectbox("Select dataset to model",
+                                datasets)
 
-feature_list: list[Feature] = detect_feature_types(
-    datasets[dataset_names.index(selected_dataset)])
+feature_list: list[Feature] = detect_feature_types(selected_dataset)
 
-target_colum: Feature = st.selectbox("select target feature", feature_list)
+target_colum: Feature | None = st.selectbox("select target feature",
+                                            feature_list,
+                                            index=None)
 
-input_features: list[Feature] = st.multiselect("select inout features",
-                                               [feature for feature in
-                                                feature_list
-                                                if feature != target_colum])
+input_features: list[Feature] | None = st.multiselect(
+    "select inout features",
+    [feature for feature in feature_list if feature != target_colum],
+    default=None)
 
 if target_colum is None:
     task_type: str = "(No target selected.)"
@@ -64,49 +68,118 @@ else:
 
 st.write(f"Detected task type is {task_type}.")
 
-if target_colum is not None:
+if target_colum is not None and input_features not in [None, []]:
     split: float = st.slider("Slect split in dataset.",
                              min_value=0.1,
                              max_value=0.9,
                              value=0.8)
 
-    model: Model = st.selectbox("select model.", get_models(task_type))
-    metrics: list[Metric] = st.multiselect("select metrics.",
-                                           get_metrics(task_type))
+    dictionary_models: dict[str, Model] = get_models(task_type)
+    model_key: str | None = st.selectbox("select model.",
+                                         dictionary_models.keys(),
+                                         index=None)
+    metrics: list[Metric] | None = st.multiselect("select metrics.",
+                                                  get_metrics(task_type),
+                                                  default=None)
 
-    if model is not None and metrics is not None:
-        pipeline: Pipeline = Pipeline(
-            metrics,
-            datasets[dataset_names.index(selected_dataset)],
-            model,
-            input_features,
-            target_colum,
-            split)
+    if model_key is not None and metrics not in [None, []]:
+        instanced_model: None | Model = None
+        uninstanced_model: Model = dictionary_models[model_key]
 
-        st.write(pipeline)
+        if st.checkbox("Use custom arguments?"):
+            match model_key:
+                case "K Nearest Neighbors":
+                    instanced_model = uninstanced_model(
+                        st.number_input(
+                            "k value - the amount of neighbors chosen.",
+                            min_value=3,
+                            step=1,
+                            value=3
+                        ))
 
-        if st.button("start train."):
-            pipeline_result: dict = pipeline.execute()
+                case "Logistic Regression":
+                    instanced_model = uninstanced_model(
+                        st.number_input(
+                            "Learning rate for gradient descent.",
+                            min_value=0.001,
+                            step=0.001,
+                            value=0.01
+                            ),
+                        st.number_input(
+                            "Number of iterations for gradient descent.",
+                            value=1000,
+                            min_value=1,
+                            step=1
+                        ))
 
-            st.write(
-                f"metrics of the pipeline: {pipeline_result['metrics']}")
-            st.write(
-                "predictionss of the pipeline:" +
-                f"{pipeline_result['predictions']}")
+                case "Decision Tree":
+                    instanced_model = uninstanced_model(
+                        st.number_input(
+                            "Maximum depth of the tree.",
+                            min_value=1
+                        ))
 
-            version = st.text_input("version number of dataset.",
-                                    help="format is 1.1.1")
-            pipeline_name = st.text_input("name of the pipeline")
+                case "Multiple Linear Regression":
+                    instanced_model = uninstanced_model(
+                        st.number_input(
+                            "Regularisation strength.",
+                            value=0.0,
+                            min_value=0.0
+                        ))
 
-            if (st.button("save Pipeline?") and
-                (version == "" or len(version.split(".")) == 3) and
-                    pipeline_name is not None):
-                central_pipeline_artifact = save_pipeline(pipeline,
-                                                          version,
-                                                          pipeline_name)
+                case "Random Forest":
+                    instanced_model = uninstanced_model(
+                        st.number_input(
+                            "Number of trees in the forest.",
+                            value=10,
+                            min_value=10,
+                            step=1
+                            ),
+                        st.number_input(
+                            "Maximum depth per tree.",
+                            min_value=1,
+                            step=1
+                        ))
 
-                automl.registry.register(central_pipeline_artifact)
-                for artifact in pipeline.artifacts:
-                    automl.registry.register(artifact)
+                case _:
+                    st.write("No arguments to customize.")
+                    instanced_model = uninstanced_model()
+        else:
+            instanced_model = uninstanced_model()
 
-                st.write('Pipeline saved')
+        if instanced_model is not None:
+            pipeline: Pipeline = Pipeline(
+                metrics,
+                selected_dataset,
+                instanced_model,
+                input_features,
+                target_colum,
+                split)
+
+            st.write(pipeline)
+
+            if st.button("start train."):
+                pipeline_result: dict = pipeline.execute()
+
+                st.write(
+                    f"metrics of the pipeline: {pipeline_result['metrics']}")
+                st.write(
+                    "predictionss of the pipeline:" +
+                    f"{pipeline_result['predictions']}")
+
+                version = st.text_input("version number of dataset.",
+                                        help="format is 1.1.1")
+                pipeline_name = st.text_input("name of the pipeline")
+
+                if (st.button("save Pipeline?") and
+                    (version == "" or len(version.split(".")) == 3) and
+                        pipeline_name is not None):
+                    central_pipeline_artifact = save_pipeline(pipeline,
+                                                              version,
+                                                              pipeline_name)
+
+                    automl.registry.register(central_pipeline_artifact)
+                    for artifact in pipeline.artifacts:
+                        automl.registry.register(artifact)
+
+                    st.write('Pipeline saved')
