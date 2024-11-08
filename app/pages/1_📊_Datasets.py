@@ -9,10 +9,10 @@ from autoop.core.ml.dataset import Dataset
 from copy import deepcopy
 
 # your code here
+# saving broke due to somewhere in database
 automl = AutoMLSystem.get_instance()
 
 datasets: list[Dataset] = list_dataset(automl.registry.list(type="dataset"))
-dataset_names: list[str] = [_.name for _ in datasets]
 
 st.set_page_config(page_title="Datasets")
 
@@ -39,7 +39,7 @@ if uploaded_file is not None:
 
     st.dataframe(pd.read_csv(deepcopy(uploaded_file)))
 else:
-    view_dataset = st.selectbox("select dataset to preview.", dataset_names)
+    view_dataset = st.selectbox("select dataset to preview.", datasets)
 
     if view_dataset is not None:
-        st.dataframe(datasets[dataset_names.index(view_dataset)].read())
+        st.dataframe(view_dataset.read())
