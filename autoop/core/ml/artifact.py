@@ -54,3 +54,6 @@ class Artifact(BaseModel):
         None
         """
         return self.data
+
+    def __str__(self) -> str:
+        return self.name
