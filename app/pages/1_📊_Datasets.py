@@ -39,7 +39,12 @@ if uploaded_file is not None:
 
     st.dataframe(pd.read_csv(deepcopy(uploaded_file)))
 else:
-    view_dataset = st.selectbox("select dataset to preview.", datasets)
+    view_dataset = st.selectbox("select dataset to preview.",
+                                datasets,
+                                index=None)
 
     if view_dataset is not None:
         st.dataframe(view_dataset.read())
+
+        if st.button("Delete Dataset?"):
+            automl.registry.delete(view_dataset.id)

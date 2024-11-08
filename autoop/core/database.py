@@ -76,6 +76,13 @@ class Database():
 
     def _persist(self) -> None:
         """Persist the data to storage"""
+        # TODO scarry test carefully
+        """for collection in set(self._data.keys())
+            path = self._join_path(f"{collection}{os.sep}{id}")
+            # Ensure parent directories are created
+            if os.path.isdir(os.path.dirname(path)):
+                os.rmdir(os.path.dirname(path))"""
+
         for collection, data in self._data.items():
             if not data:
                 continue
