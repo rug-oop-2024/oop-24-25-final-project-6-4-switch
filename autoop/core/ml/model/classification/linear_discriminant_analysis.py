@@ -6,7 +6,7 @@ from typing import Any
 class LinearDiscriminantAnalysis(Model):
     """Class of linear discriminant analysis model."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initialize model.
 
@@ -89,9 +89,9 @@ class LinearDiscriminantAnalysis(Model):
             prior = self._priors[c]
 
             scores[:, idx] = (
-                features @ self._inv_cov_matrix @ mean_vector.T
-                - 0.5 * mean_vector @ self._inv_cov_matrix @ mean_vector.T
-                + np.log(prior)
+                features @ self._inv_cov_matrix @ mean_vector.T -
+                0.5 * mean_vector @ self._inv_cov_matrix @ mean_vector.T +
+                np.log(prior)
             )
 
         return np.argmax(scores, axis=1)

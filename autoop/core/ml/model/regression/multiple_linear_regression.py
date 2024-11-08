@@ -5,7 +5,7 @@ from autoop.core.ml.model.model import Model
 class MultipleLinearRegression(Model):
     """Class of multiple linear regression model."""
 
-    def __init__(self, alpha: float = 0.0):
+    def __init__(self, alpha: float = 0.0) -> None:
         """
         Initialize model.
 
