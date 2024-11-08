@@ -1,6 +1,5 @@
 from pydantic import BaseModel, Field
 import base64
-from json import dump, load
 
 
 class Artifact(BaseModel):
@@ -56,4 +55,15 @@ class Artifact(BaseModel):
         return self.data
 
     def __str__(self) -> str:
+        """
+        String representation of the arifact class.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        the name of the artifact.
+        """
         return self.name

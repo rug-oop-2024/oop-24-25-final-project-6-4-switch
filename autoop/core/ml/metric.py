@@ -211,6 +211,6 @@ class LogLoss(Metric):
         # Prevent taking log of 0 by clipping the array
         pred_clipped = np.clip(pred, 1e-15, 1 - 1e-15)
 
-        return -np.mean(truth * np.log(pred_clipped) + (1 - truth)
-                        * np.log(1 - pred_clipped))
+        return -np.mean(truth * np.log(pred_clipped) + (1 - truth) *
+                        np.log(1 - pred_clipped))
 # endregion

@@ -31,8 +31,8 @@ def write_helper_text(text: str) -> None:
 
 st.write("# ⚙ Modelling")
 write_helper_text(
-    "In this section, you can design a machine learning pipeline to"
-    + "train a model on a dataset.")
+    "In this section, you can design a machine learning pipeline to" +
+    "train a model on a dataset.")
 
 automl: AutoMLSystem = AutoMLSystem.get_instance()
 
@@ -91,16 +91,16 @@ if target_colum is not None:
             st.write(
                 f"metrics of the pipeline: {pipeline_result['metrics']}")
             st.write(
-                "predictionss of the pipeline:"
-                + f"{pipeline_result['predictions']}")
+                "predictionss of the pipeline:" +
+                f"{pipeline_result['predictions']}")
 
             version = st.text_input("version number of dataset.",
                                     help="format is 1.1.1")
             pipeline_name = st.text_input("name of the pipeline")
 
-            if (st.button("save Pipeline?")
-                    and (version == "" or len(version.split(".")) == 3)
-                    and pipeline_name is not None):
+            if (st.button("save Pipeline?") and
+                (version == "" or len(version.split(".")) == 3) and
+                    pipeline_name is not None):
                 central_pipeline_artifact = save_pipeline(pipeline,
                                                           version,
                                                           pipeline_name)

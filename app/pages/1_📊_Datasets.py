@@ -9,7 +9,7 @@ from autoop.core.ml.dataset import Dataset
 from copy import deepcopy
 
 # your code here
-# saving broke due to somewhere in database
+# TODO saving broke due to somewhere in database
 automl = AutoMLSystem.get_instance()
 
 datasets: list[Dataset] = list_dataset(automl.registry.list(type="dataset"))
@@ -27,8 +27,8 @@ if uploaded_file is not None:
                             help="format is 1.1.1")\
 
     if (
-        st.button("save dataset?")
-            and (version == "" or len(version.split(".")) == 3)):
+        st.button("save dataset?") and
+            (version == "" or len(version.split(".")) == 3)):
         new_dataset: Dataset = create(deepcopy(uploaded_file), version)
         confirm_save = save(new_dataset)
 

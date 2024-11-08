@@ -9,14 +9,14 @@ if TYPE_CHECKING:
 
 def detect_feature_types(dataset: Dataset) -> List[Feature]:
     """
-    Detect feature types for a ML dataset. Assume there are only categorical 
+    Detect feature types for a ML dataset. Assume there are only categorical
     and numerical features, and that there are NaN values.
-    
+
     Parameters
     ----------
     dataset : Dataset
         The dataset of the ML class.
-    
+
     Returns
     -------
     List[Feature]

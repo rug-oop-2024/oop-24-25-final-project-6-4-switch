@@ -2,7 +2,6 @@ from abc import abstractmethod, ABC
 from autoop.core.ml.artifact import Artifact
 import numpy as np
 from copy import deepcopy
-from typing import Literal, Any
 from pydantic import PrivateAttr
 
 
@@ -12,7 +11,7 @@ class Model(ABC, Artifact):
     _parameters: dict = PrivateAttr(default={})
     _hyper_parameters: dict = PrivateAttr(default={})
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initialize model.
 
@@ -131,9 +130,6 @@ class Model(ABC, Artifact):
         -------
         None
         """
-
-        
-
         self.data = {
             "parameters": self._parameters,
             "hyperparameters": self._hyper_parameters
