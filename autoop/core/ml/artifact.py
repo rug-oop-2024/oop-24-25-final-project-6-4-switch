@@ -30,7 +30,7 @@ class Artifact(BaseModel):
     metadata: dict = Field(default={"experiment_id": None,
                                     "run_id": None})
     type: str = Field(default=None)
-    tags: list[str] = Field(default=[str])
+    tags: list[str] = Field(default=[])
 
     @property
     def id(self) -> str:
