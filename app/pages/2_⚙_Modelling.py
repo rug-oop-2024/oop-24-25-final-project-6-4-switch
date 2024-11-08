@@ -104,8 +104,7 @@ if target_colum is not None and input_features not in [None, []]:
                             "Learning rate for gradient descent.",
                             min_value=0.001,
                             step=0.001,
-                            value=0.01
-                            ),
+                            value=0.01),
                         st.number_input(
                             "Number of iterations for gradient descent.",
                             value=1000,
@@ -134,8 +133,7 @@ if target_colum is not None and input_features not in [None, []]:
                             "Number of trees in the forest.",
                             value=10,
                             min_value=10,
-                            step=1
-                            ),
+                            step=1),
                         st.number_input(
                             "Maximum depth per tree.",
                             min_value=1,
