@@ -21,6 +21,8 @@ class KNearestNeighbors(Model):
         """
         super().__init__()
         self.hyper_parameters["k"] = k
+        self.type = "classification"
+        self.name = "K Nearest Neighbors"
 
     def fit(self, features: np.ndarray, labels: np.ndarray) -> None:
         """

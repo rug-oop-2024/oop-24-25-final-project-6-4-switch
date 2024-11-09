@@ -20,6 +20,8 @@ class MultipleLinearRegression(Model):
         """
         super().__init__()
         self.hyper_parameters = {"alpha": alpha}
+        self.type = "regression"
+        self.name = "Multiple Linear Regression"
 
     def fit(self, features: np.ndarray, labels: np.ndarray) -> None:
         """

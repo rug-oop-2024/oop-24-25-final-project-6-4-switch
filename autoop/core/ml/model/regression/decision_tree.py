@@ -25,6 +25,8 @@ class DecisionTree(Model):
         super().__init__()
         self.hyper_parameters = {"depth": depth}
         self._tree = DecisionTreeRegressor(max_depth=depth)
+        self.type = "regression"
+        self.name = "Decision Tree"
 
     def fit(self, features: np.ndarray, labels: np.ndarray) -> None:
         """

@@ -18,6 +18,8 @@ class LinearDiscriminantAnalysis(Model):
         self._mean_vectors = {}
         self._priors = {}
         self._inv_cov_matrix = None
+        self.type = "classification"
+        self.name = "Linear Discriminant Analysis"
 
     def fit(self, features: np.ndarray, labels: np.ndarray) -> None:
         """

@@ -28,6 +28,8 @@ class LogisticRegression(Model):
         }
         self._weights = None
         self._bias = 0
+        self.type = "classification"
+        self.name = "Logistic Regression"
 
     def fit(self, features: np.ndarray, labels: np.ndarray) -> None:
         """

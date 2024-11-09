@@ -29,6 +29,8 @@ class RandomForest(Model):
         }
         # TODO doesn't see trees as a field and refuses to assign []
         self.trees = []
+        self.type = "regression"
+        self.name = "Random Forest"
 
     def fit(self, features: np.ndarray, labels: np.ndarray) -> None:
         """

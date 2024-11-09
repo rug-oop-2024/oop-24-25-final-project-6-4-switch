@@ -65,7 +65,7 @@ class Pipeline():
         """
         return f"""
     Pipeline(
-    model={self._model.type},
+    model={self._model.type} {self._model.name},
     input_features={list(map(str, self._input_features))},
     target_feature={str(self._target_feature)},
     split={self._split},
