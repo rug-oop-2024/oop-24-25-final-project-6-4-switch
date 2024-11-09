@@ -20,6 +20,7 @@ uploaded_file: IO = st.file_uploader(label="Upload dataset(csv)",
                                      type=["csv"])
 
 if uploaded_file is not None:
+    # save uploaded data mode.
     version = st.text_input("version number of dataset.",
                             help="format is 1.1.1")
 
@@ -35,6 +36,8 @@ if uploaded_file is not None:
 
     st.dataframe(pd.read_csv(deepcopy(uploaded_file)))
 else:
+    # view and delete mode.
+    # if there are no new data uplaoded
     view_dataset = st.selectbox("select dataset to preview.",
                                 list_dataset(
                                     automl.registry.list(type="dataset")),
