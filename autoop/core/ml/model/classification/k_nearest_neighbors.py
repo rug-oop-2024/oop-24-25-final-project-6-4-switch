@@ -61,6 +61,7 @@ class KNearestNeighbors(Model):
         return [self._predict_single(feature) for feature in features]
 
     # TODO: Return nparray for simplicity
+    # self._k does not excist.
     def _predict_single(self, feature: np.ndarray) -> np.str_:
         """
         Predict the truth from a single array.

@@ -172,7 +172,7 @@ If you did not implement the feature
 |`ST/modelling/pipeline/split`          |FN            |Jia Hao Zhang         |X        |this is just a wdiget not a whole module |
 |`ST/modelling/pipeline/metrics`        |FN            |Jia Hao Zhang         |X        |there is a way to get metrics depending on target type |
 |`ST/modelling/pipeline/summary`        |FN            |Jia Hao Zhang         |X        |It does show a summary, but somehow model is still none |
-|`ST/modelling/pipeline/train`          |FN            |Jia Hao Zhang         |         |Not working yet but code is there due to missing linear regression |
+|`ST/modelling/pipeline/train`          |FN            |Jia Hao Zhang         |X        |this seems to work for regression fro now atleast for the ones where the data fits the model. class model still don't work  |
 |`ST/modelling/pipeline/save`           |FN            |Jia Hao Zhang         |         |Not working yet but code is there due to missing linear regression |
 |`ST/page/deployment`                   |FN            |                      |         | |
 |`ST/deployment/load`                   |FN            |                      |         | |
