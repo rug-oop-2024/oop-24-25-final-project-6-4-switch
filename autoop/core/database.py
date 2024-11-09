@@ -76,7 +76,7 @@ class Database():
 
     def _persist(self) -> None:
         """Persist the data to storage"""
-        # TODO scarry test carefully
+        # deletes all current meta data
         for collection in set(self._data.keys()):
             for file in self._storage.list(f"{collection}"):
                 self._storage.delete(file)
