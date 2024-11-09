@@ -168,10 +168,10 @@ If you did not implement the feature
 |`ST/page/modelling`                    |NF            |Jia Hao Zhang         |X        |partially done. |
 |`ST/modelling/datasets/list`           |FN            |Jia Hao Zhang         |X        |made this feature to turn artifacts into datasets|
 |`ST/modelling/datasets/features`       |FN            |Jia Hao Zhang         |X        |Just used the detect features directly instead of making a new wrapper. |
-|`ST/modelling/models`                  |FN            |Jia Hao Zhang         |         |Not working yet but code is there due to missing linear regression |
-|`ST/modelling/pipeline/split`          |FN            |Jia Hao Zhang         |         |Not working yet but code is there due to missing linear regression |
-|`ST/modelling/pipeline/metrics`        |FN            |Jia Hao Zhang         |         |Not working yet but code is there due to missing linear regression |
-|`ST/modelling/pipeline/summary`        |FN            |Jia Hao Zhang         |         |Not working yet but code is there due to missing linear regression |
+|`ST/modelling/models`                  |FN            |Jia Hao Zhang         |X        |There is a way to get the models depending on target cilum type |
+|`ST/modelling/pipeline/split`          |FN            |Jia Hao Zhang         |X        |this is just a wdiget not a whole module |
+|`ST/modelling/pipeline/metrics`        |FN            |Jia Hao Zhang         |X        |there is a way to get metrics depending on target type |
+|`ST/modelling/pipeline/summary`        |FN            |Jia Hao Zhang         |X        |It does show a summary, but somehow model is still none |
 |`ST/modelling/pipeline/train`          |FN            |Jia Hao Zhang         |         |Not working yet but code is there due to missing linear regression |
 |`ST/modelling/pipeline/save`           |FN            |Jia Hao Zhang         |         |Not working yet but code is there due to missing linear regression |
 |`ST/page/deployment`                   |FN            |Jia Hao Zhang         |         | |
