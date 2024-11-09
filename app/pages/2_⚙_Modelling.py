@@ -157,7 +157,7 @@ if target_colum is not None and input_features not in [None, []]:
 
             st.write(pipeline)
 
-            if st.button("start train."):
+            if st.checkbox("auto train train."):
                 pipeline_result: dict = pipeline.execute()
 
                 pipeline_result_keys = list(pipeline_result.keys())
