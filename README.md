@@ -174,7 +174,7 @@ If you did not implement the feature
 |`ST/modelling/pipeline/summary`        |FN            |Jia Hao Zhang         |X        |It does show a summary, but somehow model is still none |
 |`ST/modelling/pipeline/train`          |FN            |Jia Hao Zhang         |         |Not working yet but code is there due to missing linear regression |
 |`ST/modelling/pipeline/save`           |FN            |Jia Hao Zhang         |         |Not working yet but code is there due to missing linear regression |
-|`ST/page/deployment`                   |FN            |Jia Hao Zhang         |         | |
+|`ST/page/deployment`                   |FN            |                      |         | |
 |`ST/deployment/load`                   |FN            |                      |         | |
 |`ST/deployment/predict`                |FN            |                      |         | |
 
