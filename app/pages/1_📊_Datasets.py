@@ -1,12 +1,14 @@
 import streamlit as st
 import pandas as pd
 
-from app.core.system import AutoMLSystem
+from copy import deepcopy
+from typing import IO
+
 from app.datasets.management.create import create
 from app.datasets.management.save import save
 from app.datasets.list import list_dataset
-from copy import deepcopy
-from typing import IO
+
+from app.core.system import AutoMLSystem
 
 # your code here
 automl: AutoMLSystem = AutoMLSystem.get_instance()
