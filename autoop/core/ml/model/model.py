@@ -136,3 +136,5 @@ class Model(ABC, Artifact):
             "parameters": self._parameters,
             "hyperparameters": self._hyper_parameters
         }
+
+    # TODO to artifact method. (used in ta code)
