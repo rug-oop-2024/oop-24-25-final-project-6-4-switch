@@ -53,9 +53,9 @@ selected_dataset = st.selectbox("Select dataset to model",
 
 feature_list: list["Feature"] = detect_feature_types(selected_dataset)
 
-target_colum: "Feature" | None = st.selectbox("select target feature",
-                                              feature_list,
-                                              index=None)
+target_colum: "Feature" = st.selectbox("select target feature",
+                                       feature_list,
+                                       index=None)
 
 input_features: list["Feature"] | None = st.multiselect(
     "select inout features",
@@ -82,7 +82,7 @@ if target_colum is not None and input_features not in [None, []]:
                                                     default=None)
 
     if model_key is not None and metrics not in [None, []]:
-        instanced_model: None | "Model" = None
+        instanced_model: "Model" = None
         uninstanced_model: "Model" = dictionary_models[model_key]
 
         if st.checkbox("Use custom arguments?"):
