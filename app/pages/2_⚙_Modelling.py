@@ -1,19 +1,24 @@
 import streamlit as st
 
+from typing import TYPE_CHECKING
+
 from app.core.system import AutoMLSystem
 from app.datasets.list import list_dataset
 
 from app.modelling.models import get_models
 from app.modelling.get_metric import get_metrics
 from app.modelling.save import save_pipeline
-
-from autoop.core.ml.dataset import Dataset
-from autoop.core.ml.feature import Feature
-from autoop.core.ml.pipeline import Pipeline
-from autoop.core.ml.metric import Metric
-from autoop.core.ml.model.model import Model
+from app.modelling.task_type import get_task_type
 
 from autoop.functional.feature import detect_feature_types
+
+from autoop.core.ml.pipeline import Pipeline
+
+if TYPE_CHECKING:
+    from autoop.core.ml.dataset import Dataset
+    from autoop.core.ml.feature import Feature
+    from autoop.core.ml.metric import Metric
+    from autoop.core.ml.model.model import Model
 
 
 st.set_page_config(page_title="Modelling", page_icon="📈")
@@ -39,33 +44,25 @@ write_helper_text(
 
 automl: AutoMLSystem = AutoMLSystem.get_instance()
 
-datasets: list[Dataset] = list_dataset(automl.registry.list(type="dataset"))
+datasets: list["Dataset"] = list_dataset(automl.registry.list(type="dataset"))
 
 # your code here
-# TODO test the classification models.
 
 selected_dataset = st.selectbox("Select dataset to model",
                                 datasets)
 
-feature_list: list[Feature] = detect_feature_types(selected_dataset)
+feature_list: list["Feature"] = detect_feature_types(selected_dataset)
 
-target_colum: Feature | None = st.selectbox("select target feature",
-                                            feature_list,
-                                            index=None)
+target_colum: "Feature" = st.selectbox("select target feature",
+                                       feature_list,
+                                       index=None)
 
-input_features: list[Feature] | None = st.multiselect(
+input_features: list["Feature"] | None = st.multiselect(
     "select inout features",
     [feature for feature in feature_list if feature != target_colum],
     default=None)
 
-if target_colum is None:
-    task_type: str = "(No target selected.)"
-else:
-    match target_colum.type:
-        case "numerical":
-            task_type = "regresion"
-        case "categorical":
-            task_type = "classification"
+task_type: str = get_task_type(target_colum)
 
 st.write(f"Detected task type is {task_type}.")
 
@@ -75,17 +72,18 @@ if target_colum is not None and input_features not in [None, []]:
                              max_value=0.9,
                              value=0.8)
 
-    dictionary_models: dict[str, Model] = get_models(task_type)
+    dictionary_models: dict[str, "Model"] = get_models(task_type)
     model_key: str | None = st.selectbox("select model.",
                                          dictionary_models.keys(),
                                          index=None)
-    metrics: list[Metric] | None = st.multiselect("select metrics.",
-                                                  get_metrics(task_type),
-                                                  default=None)
+
+    metrics: list["Metric"] | None = st.multiselect("select metrics.",
+                                                    get_metrics(task_type),
+                                                    default=None)
 
     if model_key is not None and metrics not in [None, []]:
-        instanced_model: None | Model = None
-        uninstanced_model: Model = dictionary_models[model_key]
+        instanced_model: "Model" = None
+        uninstanced_model: "Model" = dictionary_models[model_key]
 
         if st.checkbox("Use custom arguments?"):
             match model_key:
@@ -160,16 +158,15 @@ if target_colum is not None and input_features not in [None, []]:
             if st.checkbox("auto train train."):
                 pipeline_result: dict = pipeline.execute()
 
-                pipeline_result_keys = list(pipeline_result.keys())
+                pipeline_result_keys: list[str] = list(pipeline_result.keys())
 
-                st.write("metrics of the pipeline:")
-                st.dataframe(pipeline_result[pipeline_result_keys[0]])
+                text: list[str] = ["metrics of the pipeline:",
+                                   "metric results of pipeline:",
+                                   "predictionss of the pipeline:"]
 
-                st.write("metric results of pipeline:")
-                st.dataframe(pipeline_result[pipeline_result_keys[1]])
-
-                st.write("predictionss of the pipeline:")
-                st.dataframe(pipeline_result[pipeline_result_keys[2]])
+                for text, key in zip(text, pipeline_result_keys):
+                    st.write(text)
+                    st.dataframe(pipeline_result[key])
 
                 version = st.text_input("version number of dataset.",
                                         help="format is 1.1.1")
