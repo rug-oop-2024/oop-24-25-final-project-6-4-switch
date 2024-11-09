@@ -160,11 +160,16 @@ if target_colum is not None and input_features not in [None, []]:
             if st.button("start train."):
                 pipeline_result: dict = pipeline.execute()
 
-                st.write(
-                    f"metrics of the pipeline: {pipeline_result['metrics']}")
-                st.write(
-                    "predictionss of the pipeline:" +
-                    f"{pipeline_result['predictions']}")
+                pipeline_result_keys = list(pipeline_result.keys())
+
+                st.write("metrics of the pipeline:")
+                st.dataframe(pipeline_result[pipeline_result_keys[0]])
+
+                st.write("metric results of pipeline:")
+                st.dataframe(pipeline_result[pipeline_result_keys[1]])
+
+                st.write("predictionss of the pipeline:")
+                st.dataframe(pipeline_result[pipeline_result_keys[2]])
 
                 version = st.text_input("version number of dataset.",
                                         help="format is 1.1.1")
