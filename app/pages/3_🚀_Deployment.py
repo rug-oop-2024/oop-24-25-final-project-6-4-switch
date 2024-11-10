@@ -1,7 +1,9 @@
 from typing import TYPE_CHECKING
 from app.core.system import AutoMLSystem
+from autoop.core.ml.model import Model
 import pickle
 import streamlit as st
+import pandas as pd
 
 if TYPE_CHECKING:
     from autoop.core.ml.artifact import Artifact
@@ -35,8 +37,17 @@ if current_pipeline is not None:
         accept_multiple_files=False,
         type=["csv"])
 
-    # turn model artifact into model
+    if predict_data_file is not None:
+        input_data = pd.read_csv(predict_data_file)
 
-    # input the new csv data in the model
+        if input_feature not in input_data.columns:
+            st.error(f"CSV must include the feature: {input_feature}")
+        else:
+            model = pickle.loads(model_artifact.read)
+            if not isinstance(model, Model):
+                st.error("The loaded model is not an instance of the" +
+                         "expected Model class.")
+            predictions = model.predict(input_data[input_feature])
 
-    # get model prediction and display to user.
+            st.subheader("Predictions")
+            st.write(predictions)
