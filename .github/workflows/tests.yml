@@ -14,7 +14,7 @@ on:
 jobs:
   local_tests:
     permissions: write-all
-    runs-on: prroai
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-python@v5
         with:
