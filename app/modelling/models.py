@@ -13,7 +13,7 @@ from autoop.core.ml.model.regression import (
 from typing import Literal, Dict
 
 
-def get_models(type: Literal["regression",
+def list_models(type: Literal["regression",
                              "classification"]) -> Dict[str, "Model"]:
     """
     Get list of models that fit the type of target feature.
