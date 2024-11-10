@@ -1,6 +1,7 @@
 import numpy as np
 from autoop.core.ml.model.model import Model
 
+
 class LogisticRegression(Model):
     """Class of logistic regression model."""
 
@@ -104,7 +105,6 @@ class LogisticRegression(Model):
         """
         if not self.is_fitted:
             raise ValueError("Model has not been trained, fit it first!")
-
 
         linear_model = (np.dot(features, self.parameters["weights"]) +
                         self.parameters["bias"])
