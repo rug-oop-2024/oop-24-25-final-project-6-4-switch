@@ -14,6 +14,11 @@ on:
 jobs:
   local_tests:
     permissions: write-all
-    runs-on: ubuntu-latest
+    runs-on: prroai
     steps:
-      - run: python -m autoop.tests.main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: run all tests
+        run: python -m autoop.tests.main
