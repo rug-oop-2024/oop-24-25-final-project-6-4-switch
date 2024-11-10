@@ -1,7 +1,6 @@
 import numpy as np
 from autoop.core.ml.model.model import Model
 
-
 class LogisticRegression(Model):
     """Class of logistic regression model."""
 
@@ -26,7 +25,7 @@ class LogisticRegression(Model):
             "learning_rate": learning_rate,
             "iterations": iterations
         }
-        self.is_fitted = False
+        self.is_fitted: bool = False
         self.type = "classification"
         self.name = "Logistic Regression"
 
@@ -45,15 +44,20 @@ class LogisticRegression(Model):
         -------
         None
         """
+        labels = np.argmax(labels, axis=1)
         n_samples, n_features = features.shape
-        weights = np.zeros(n_features)
-        bias = 0
+        n_classes = len(np.unique(labels))
+
+        weights = np.zeros((n_features, n_classes))
+        bias = np.zeros(n_classes)
 
         for _ in range(self.hyper_parameters["iterations"]):
             linear_model = np.dot(features, weights) + bias
             predictions = self._sigmoid(linear_model)
-            dw = (1 / n_samples) * np.dot(features.T, (predictions - labels))
-            db = (1 / n_samples) * np.sum(predictions - labels)
+
+            dw = (1 / n_samples) * np.dot(features.T, (predictions))
+            db = (1 / n_samples) * np.sum(predictions, axis=0)
+
             weights -= self.hyper_parameters["learning_rate"] * dw
             bias -= self.hyper_parameters["learning_rate"] * db
 
@@ -101,7 +105,14 @@ class LogisticRegression(Model):
         if not self.is_fitted:
             raise ValueError("Model has not been trained, fit it first!")
 
-        linear_model = np.dot(features, self.parameters["weights"]) + \
-            self.parameters["bias"]
+
+        linear_model = np.dot(features, self.parameters["weights"]) + self.parameters["bias"]
         probabilities = self._sigmoid(linear_model)
-        return (probabilities >= 0.5).astype(int)
+
+        predicted_classes = np.argmax(probabilities, axis=1)
+
+        # Convert the predicted class indices into one-hot encoded format
+        n_samples = len(predicted_classes)
+        one_hot_predictions = np.zeros((n_samples, self.parameters["weights"].shape[1]))
+
+        return probabilities
