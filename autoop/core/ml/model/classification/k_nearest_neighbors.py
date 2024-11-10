@@ -80,7 +80,7 @@ class KNearestNeighbors(Model):
         str_
             Predicted label.
         """
-        distance = np.linalg.norm(self.parameters["features"]-
+        distance = np.linalg.norm(self.parameters["features"] -
                                   feature, axis=1)
 
         indices = np.argsort(distance)[:self.hyper_parameters["k"]]
