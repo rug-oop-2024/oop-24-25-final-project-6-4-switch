@@ -46,7 +46,7 @@ class KNearestNeighbors(Model):
         }
         self.is_fitted = True
 
-    def predict(self, features: np.ndarray) -> np.ndarray:
+    def predict(self, features: np.ndarray) -> np.array:
         """
         Make predictions using the fitted model.
 
@@ -63,7 +63,7 @@ class KNearestNeighbors(Model):
         if not self.is_fitted:
             raise ValueError("Model has not been trained, fit it first!")
 
-        return np.ndarray([self._predict_single(feature) for feature
+        return np.array([self._predict_single(feature) for feature
                            in features])
 
     def _predict_single(self, feature: np.ndarray) -> np.str_:

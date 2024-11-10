@@ -156,7 +156,7 @@ class MeanAbsoluteError(Metric):
         Returns
         -------
         str
-            String of the repsensentation of this metric.
+            String of the representation of this metric.
         """
         return "Mean Absolute Error"
 
