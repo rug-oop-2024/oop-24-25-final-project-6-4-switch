@@ -12,7 +12,7 @@ class MultipleLinearRegression(Model):
         Parameters
         ----------
         alpha : float
-            Regularisation strength.
+            Regularization strength.
 
         Returns
         -------
