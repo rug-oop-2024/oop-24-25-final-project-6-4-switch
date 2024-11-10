@@ -42,7 +42,9 @@ class Artifact(BaseModel):
         Str
             ID of the artifact.
         """
-        return f"{base64.b64encode(self.asset_path.encode())}:{self.version}"
+        # To be OS-friendly, our id replaces the colon (:)
+        # with an underscore (_).
+        return f"{base64.b64encode(self.asset_path.encode())}_{self.version}"
 
     def read(self) -> bytes:
         """
