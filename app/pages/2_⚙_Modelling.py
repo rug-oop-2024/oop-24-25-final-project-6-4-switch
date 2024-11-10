@@ -179,7 +179,7 @@ if selected_dataset is not None:
                         st.write(text)
                         st.dataframe(pipeline_result[key])
 
-                    version = st.text_input("version number of dataset.",
+                    version = st.text_input("version number of pipeline.",
                                             help="format is 1.1.1")
                     pipeline_name = st.text_input("name of the pipeline")
 
