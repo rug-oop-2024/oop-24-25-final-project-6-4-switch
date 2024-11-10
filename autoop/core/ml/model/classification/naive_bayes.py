@@ -40,7 +40,7 @@ class NaiveBayes(Model):
         None
         """
         labels = np.argmax(labels, axis=1)
-        classes, class_counts  = np.unique(labels, return_counts=True)
+        classes, class_counts = np.unique(labels, return_counts=True)
         feature_probs = []
 
         for c in classes:
