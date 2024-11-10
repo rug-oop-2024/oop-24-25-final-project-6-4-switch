@@ -10,7 +10,6 @@ from app.datasets.list import list_dataset
 
 from app.core.system import AutoMLSystem
 
-# your code here
 automl: AutoMLSystem = AutoMLSystem.get_instance()
 
 st.set_page_config(page_title="Datasets")

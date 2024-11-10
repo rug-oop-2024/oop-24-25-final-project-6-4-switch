@@ -93,15 +93,15 @@ class Database():
             if not data:
                 continue
             for id, item in data.items():
-                self._storage.save(json.dumps(item).encode(),
-                                   f"{collection}{os.sep}{id}")
+                self._storage.save(json.dumps(item, indent=2).encode(),
+                                   f"{collection}{os.sep}{id}.json")
 
         # for things that were deleted, we need to remove them from the storage
         keys = self._storage.list("")
         for key in keys:
             collection, id = key.split(os.sep)[-2:]
             if not self._data.get(collection, id):
-                self._storage.delete(f"{collection}{os.sep}{id}")
+                self._storage.delete(f"{collection}{os.sep}{id}.json")
 
     def _load(self) -> None:
         """Load the data from storage"""
