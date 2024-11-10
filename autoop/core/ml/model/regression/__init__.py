@@ -10,6 +10,4 @@ from autoop.core.ml.model.regression.random_forest import (
     RandomForest
 )
 
-
-print(f"{DecisionTree()}, {MultipleLinearRegression()}, " +
-      f"{RandomForest()} have been successfully imported")
+DecisionTree(), MultipleLinearRegression(), RandomForest()
