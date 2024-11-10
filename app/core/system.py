@@ -105,9 +105,9 @@ class ArtifactRegistry():
         returns:
             None
         """
-        data = self._database.get("artifacts", artifact_id)
+        data = self._database.get("artifacts", artifact_id + ".json")
         self._storage.delete(data["asset_path"])
-        self._database.delete("artifacts", artifact_id)
+        self._database.delete("artifacts", artifact_id + ".json")
 
 
 class AutoMLSystem:
