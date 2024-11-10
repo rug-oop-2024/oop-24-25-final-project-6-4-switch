@@ -25,6 +25,7 @@ class DecisionTree(Model):
         super().__init__()
         self.hyper_parameters = {"depth": depth}
         self._tree = DecisionTreeRegressor(max_depth=depth)
+        self.is_fitted = False
         self.type = "regression"
         self.name = "Decision Tree"
 
@@ -44,6 +45,8 @@ class DecisionTree(Model):
         None
         """
         self._tree.fit(features, labels)
+        self.parameters = self._tree.get_params()
+        self.is_fitted = True
 
     def predict(self, features: np.ndarray) -> np.ndarray:
         """
@@ -58,5 +61,12 @@ class DecisionTree(Model):
         -------
         ndarray
             Predicted values.
+
+        Raises
+        ------
+        ValueError
+            If the model has not been trained yet.
         """
+        if not self.is_fitted:
+            raise ValueError("Model has not been trained, fit it first!")
         return self.tree.predict(features)

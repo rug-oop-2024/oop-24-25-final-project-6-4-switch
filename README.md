@@ -154,13 +154,13 @@ If you did not implement the feature
 | Requirement                           | Type (FN/NF) | Implemented by       | Implementation Completed (add X if done) | Comment |
 |-------------------------------------- |--------------|----------------------|------------------------------------------|---------|
 |`Up-to-date requirements.txt`          |NF            |Both|X                                        |Reflected for Linux and Windows|
-|`ML/detect-features`                   |FN            |Both|X||
-|`ML/artifact`                          |FN            |Both|X||
-|`ML/feature`                           |NF            |Both|X||
+|`ML/detect-features`                   |FN            |Marcus Persson|X||
+|`ML/artifact`                          |FN            |Marcus Persson|X||
+|`ML/feature`                           |NF            |Marcus Persson|X||
 |`ML/metric`                            |FN            |Marcus Persson        |X||
 |`ML/metric/extensions`                 |FN            |Marcus Persson        |X|"mean_squared_error", "mean_absolute_error", "r_squared", "accuracy", "precision","log_loss"|
 |`ML/model`                             |NF            |Marcus Persson        |X|Implementation (?). Will re-evaluate if there are more needs.|
-|`ML/model/extensions`                  |FN            |Marcus Persson        |X|Need to double-check if everything works. "k_nearest_neighbors", "linear_discriminant_analysis", "logistic_regression", "decision_tree", "multiple_linear_regression","random_forest"|
+|`ML/model/extensions`                  |FN            |Marcus Persson        |X|"k_nearest_neighbors", "naive_bayes", "logistic_regression", "decision_tree", "multiple_linear_regression","random_forest"|
 |`ML/pipeline/evaluation`               |FN            |Marcus Persson        |X|All good. Pipeline tests work.|
 | `ST/page/datasets`                    |NF            |Jia Hao Zhang         |X        |Basic dataset viewing and saving seems to work.|
 | `ST/datasets/management/create`       |FN            |Jia Hao Zhang         |X        |it does create new dataset fro now. needs more testing and seeing how to do it properly later.|

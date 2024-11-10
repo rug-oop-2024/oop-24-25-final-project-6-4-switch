@@ -10,6 +10,7 @@ class Model(ABC, Artifact):
 
     _parameters: dict = PrivateAttr(default={})
     _hyper_parameters: dict = PrivateAttr(default={})
+    _is_fitted: bool = PrivateAttr(default=False)
 
     def __init__(self) -> None:
         """
@@ -81,6 +82,11 @@ class Model(ABC, Artifact):
         Returns
         -------
         None
+
+        Raises
+        ------
+        TypeError
+            If hyper_parameters is not a dictionary
         """
         if not isinstance(parameters, dict):
             raise TypeError("Parameters must be a dictionary.")
@@ -111,28 +117,49 @@ class Model(ABC, Artifact):
         Returns
         -------
         None
+
+        Raises
+        ------
+        TypeError
+            If hyper_parameters is not a dictionary
         """
         if not isinstance(hyper_parameters, dict):
             raise TypeError("Hyperparameters must be a dictionary.")
         self._hyper_parameters = hyper_parameters
 
-    # TODO: Encode to base64 bytes for data
-    def save(self, file_name: str) -> None:
+    @property
+    def is_fitted(self) -> bool:
         """
-        Save your model.
+        Get bool if model is fitted.
+
+        Returns
+        -------
+        bool
+            False if model is not fitted, True if it is.
+        """
+        return self._is_fitted
+
+    @is_fitted.setter
+    def is_fitted(self, is_fitted: bool) -> None:
+        """
+        Set if model is fitted.
 
         Parameters
         ----------
-        file_name : str
-            Name of the file.
+        is_fitted : bool
+            Boolean to set.
 
         Returns
         -------
         None
-        """
-        self.data = {
-            "parameters": self._parameters,
-            "hyperparameters": self._hyper_parameters
-        }
 
-    # TODO to artifact method. (used in ta code)
+        Raises
+        ------
+        TypeError
+            If is_fitted is not a bool.
+        """
+        if not isinstance(is_fitted, bool):
+            raise TypeError("is_fitted must be a bool.")
+        self._is_fitted = is_fitted
+
+    # TODO: to artifact method
