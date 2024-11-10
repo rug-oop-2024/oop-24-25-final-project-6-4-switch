@@ -46,8 +46,9 @@ class RandomForest(Model):
         -------
         None
         """
-        self.parameters["trees"] = [self._fit_single(features, labels) for _ in
-                                    range(self.hyper_parameters["n_trees"])]
+        self.parameters = {
+            "trees": [self._fit_single(features, labels) for
+                      _ in range(self.hyper_parameters["n_trees"])]}
         self.is_fitted = True
 
     def _fit_single(self, features: np.ndarray, labels: np.ndarray) \

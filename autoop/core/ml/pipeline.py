@@ -99,11 +99,17 @@ class Pipeline():
             if artifact_type in ["OneHotEncoder"]:
                 data = artifact["encoder"]
                 data = pickle.dumps(data)
-                artifacts.append(Artifact(name=name, data=data))
+                artifacts.append(Artifact(name=name,
+                                          data=data,
+                                          version="encoder",
+                                          asset_path=f"encoder{name}"))
             if artifact_type in ["StandardScaler"]:
                 data = artifact["scaler"]
                 data = pickle.dumps(data)
-                artifacts.append(Artifact(name=name, data=data))
+                artifacts.append(Artifact(name=name,
+                                          data=data,
+                                          version="scalar",
+                                          asset_path=f"scalar{name}"))
 
         pipeline_data = {
             "input_features": self._input_features,
@@ -111,7 +117,9 @@ class Pipeline():
             "split": self._split,
         }
         artifacts.append(Artifact(name="pipeline_config",
-                                  data=pickle.dumps(pipeline_data)))
+                                  data=pickle.dumps(pipeline_data),
+                                  version="data",
+                                  asset_path="encoderpipeline_config"))
         artifacts.append(
             self._model.to_artifact(name=f"pipeline_model_{self._model.type}"))
         return artifacts

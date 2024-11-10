@@ -69,4 +69,4 @@ class DecisionTree(Model):
         """
         if not self.is_fitted:
             raise ValueError("Model has not been trained, fit it first!")
-        return self.tree.predict(features)
+        return self._tree.predict(features)
