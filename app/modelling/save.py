@@ -1,3 +1,5 @@
+import pickle
+
 from autoop.core.ml.pipeline import Pipeline
 from autoop.core.ml.artifact import Artifact
 
@@ -18,6 +20,8 @@ def save_pipeline(pipeline: Pipeline, name: str, version: str) -> Artifact:
         type="pipeline",
         name=name,
         version=version,
-        tags=[artifact.id for artifact in pipeline_artifacts])
+        data=pickle.dumps(
+            {"data":[artifact.id for artifact in pipeline_artifacts]}),
+        asset_path=f"{version}{name}")
 
     return artifact_pipeline
