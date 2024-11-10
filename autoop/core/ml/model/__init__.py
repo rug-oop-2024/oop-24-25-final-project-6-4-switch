@@ -5,12 +5,12 @@ from autoop.core.ml.model.regression import (
     DecisionTree,
     MultipleLinearRegression,
     RandomForest
-)
+) # noqa
 from autoop.core.ml.model.classification import (
     NaiveBayes,
     KNearestNeighbors,
     LogisticRegression
-)
+) # noqa
 
 REGRESSION_MODELS = [
     "decision_tree",
