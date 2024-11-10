@@ -39,9 +39,9 @@ class NaiveBayes(Model):
         -------
         None
         """
-        classes, class_counts = np.unique(labels, return_counts=True)
-        feature_probs = []
         labels = np.argmax(labels, axis=1)
+        classes, class_counts  = np.unique(labels, return_counts=True)
+        feature_probs = []
 
         for c in classes:
             class_data = features[labels == c]
@@ -87,6 +87,4 @@ class NaiveBayes(Model):
                 features, axis=1)
             log_probs.append(log_prob)
 
-        log_probs = np.array(log_probs)
-
-        return np.argmax(log_probs, axis=0)
+        return np.array(log_probs).T
