@@ -64,7 +64,7 @@ class KNearestNeighbors(Model):
             raise ValueError("Model has not been trained, fit it first!")
 
         return np.array([self._predict_single(feature) for feature
-                           in features])
+                         in features])
 
     def _predict_single(self, feature: np.ndarray) -> np.str_:
         """
