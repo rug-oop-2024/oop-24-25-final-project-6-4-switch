@@ -1,6 +1,5 @@
 import numpy as np
 from autoop.core.ml.model.model import Model
-from typing import Any
 
 
 class LinearDiscriminantAnalysis(Model):
