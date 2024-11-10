@@ -1,7 +1,7 @@
 from autoop.core.ml.model import Model
 from autoop.core.ml.model.classification import (
     KNearestNeighbors,
-    LinearDiscriminantAnalysis,
+    NaiveBayes,
     LogisticRegression
 )
 from autoop.core.ml.model.regression import (
@@ -27,7 +27,7 @@ def list_models(type: Literal["regression",
     match type:
         case "classification":
             return {"K Nearest Neighbors": KNearestNeighbors,
-                    "Linear Discriminant Analysis": LinearDiscriminantAnalysis,
+                    "Naive Bayes": NaiveBayes,
                     "Logistic Regression": LogisticRegression}
         case "regression":
             return {"Decision Tree": DecisionTree,
