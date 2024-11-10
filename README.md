@@ -95,11 +95,11 @@ E.g. docs/decisions/DSC-0001-use-typescript.md
 Some examples include housing prices, second-hand cars, etc.
 
 ### Checklist
-- [ ] I have read the instructions carefully.
-- [ ] I have filled my personal rubric.
-- [ ] The code is refactored to style standards.
-- [ ] I have passed my tests.
-- [ ] I have documented my code and decisions.
+- [x] I have read the instructions carefully.
+- [x] I have filled my personal rubric.
+- [x] The code is refactored to style standards.
+- [x] I have passed my tests.
+- [x] I have documented my code and decisions.
 
 # Grading & Submission (IMPORTANT)
 
@@ -159,7 +159,7 @@ If you did not implement the feature
 |`ML/feature`                           |NF            |Marcus Persson|X||
 |`ML/metric`                            |FN            |Marcus Persson        |X||
 |`ML/metric/extensions`                 |FN            |Marcus Persson        |X|"mean_squared_error", "mean_absolute_error", "r_squared", "accuracy", "precision","log_loss"|
-|`ML/model`                             |NF            |Marcus Persson        |X|Implementation (?). Will re-evaluate if there are more needs.|
+|`ML/model`                             |NF            |Marcus Persson        |X||
 |`ML/model/extensions`                  |FN            |Marcus Persson        |X|"k_nearest_neighbors", "naive_bayes", "logistic_regression", "decision_tree", "multiple_linear_regression","random_forest"|
 |`ML/pipeline/evaluation`               |FN            |Marcus Persson        |X|All good. Pipeline tests work.|
 | `ST/page/datasets`                    |NF            |Jia Hao Zhang         |X        |Basic dataset viewing and saving seems to work.|
