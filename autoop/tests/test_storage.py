@@ -20,10 +20,10 @@ class TestStorage(unittest.TestCase):
         key = "test/path"
         self.storage.save(test_bytes, key)
         self.assertEqual(self.storage.load(key), test_bytes)
-        otherkey = "test/otherpath"
+        other_key = "test/otherpath"
         # should not be the same
         try:
-            self.storage.load(otherkey)
+            self.storage.load(other_key)
         except Exception as e:
             self.assertIsInstance(e, NotFoundError)
 

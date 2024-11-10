@@ -9,12 +9,12 @@ from autoop.core.ml.metric import (
     LogLoss)
 
 
-def get_metrics(type: Literal["regresion", "classification"]) -> list[Metric]:
+def get_metrics(type: Literal["regression", "classification"]) -> list[Metric]:
     """
     Get list of models that fit the type of target feature.
 
     Arguments:
-        Type (Literal["regresion", "classification"]): type of target colum.
+        Type (Literal["regression", "classification"]): type of target colum.
 
     Returns:
         list of model that fit the target feature.
@@ -24,7 +24,7 @@ def get_metrics(type: Literal["regresion", "classification"]) -> list[Metric]:
             return [MeanAbsoluteError(),
                     MeanSquaredError(),
                     RSquared()]
-        case "regresion":
+        case "regression":
             return [Accuracy(),
                     Precision(),
                     LogLoss()]

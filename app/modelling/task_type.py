@@ -6,7 +6,7 @@ if TYPE_CHECKING:
 
 def get_task_type(target_colum: "Feature") -> str:
     """
-    Get the name of the task type accurding to target colum.
+    Get the name of the task type according to target colum.
 
     Parameters
     ----------
@@ -16,13 +16,13 @@ def get_task_type(target_colum: "Feature") -> str:
     Returns
     -------
     str:
-        the task type name of the task based of targert colum.
+        the task type name of the task based of target colum.
     """
     if target_colum is None:
         return "(No target selected.)"
     else:
         match target_colum.type:
             case "numerical":
-                return "regresion"
+                return "regression"
             case "categorical":
                 return "classification"

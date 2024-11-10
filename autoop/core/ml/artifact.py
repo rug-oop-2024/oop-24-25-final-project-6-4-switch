@@ -56,7 +56,7 @@ class Artifact(BaseModel):
 
     def __str__(self) -> str:
         """
-        String representation of the arifact class.
+        String representation of the artifact class.
 
         Parameters
         ----------

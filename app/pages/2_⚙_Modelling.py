@@ -67,7 +67,7 @@ task_type: str = get_task_type(target_colum)
 st.write(f"Detected task type is {task_type}.")
 
 if target_colum is not None and input_features not in [None, []]:
-    split: float = st.slider("Slect split in dataset.",
+    split: float = st.slider("Select split in dataset.",
                              min_value=0.1,
                              max_value=0.9,
                              value=0.8)
@@ -120,7 +120,7 @@ if target_colum is not None and input_features not in [None, []]:
                 case "Multiple Linear Regression":
                     instanced_model = uninstanced_model(
                         st.number_input(
-                            "Regularisation strength.",
+                            "Regularization strength.",
                             value=0.0,
                             min_value=0.0
                         ))
@@ -162,7 +162,7 @@ if target_colum is not None and input_features not in [None, []]:
 
                 text: list[str] = ["metrics of the pipeline:",
                                    "metric results of pipeline:",
-                                   "predictionss of the pipeline:"]
+                                   "predictions of the pipeline:"]
 
                 for text, key in zip(text, pipeline_result_keys):
                     st.write(text)

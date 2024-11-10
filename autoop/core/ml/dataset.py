@@ -7,7 +7,7 @@ class Dataset(Artifact):
     """A class to represent an ML dataset"""
     def __init__(self, *args, **kwargs) -> None:
         """
-        Initialize Dataset class with given arbetriery amount erguments and
+        Initialize Dataset class with given arbitrary amount of arguments and
         keyword arguments.
 
         Returns:

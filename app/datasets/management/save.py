@@ -10,7 +10,7 @@ def save(dataset: Dataset) -> bool:
         dataset (Dataset): dataset that needs to be saved.
 
     returns:
-        bool: if the saving was succesfull or not.
+        bool: if the saving was successful or not.
     """
     automl = AutoMLSystem.get_instance()
     automl.registry.register(dataset)

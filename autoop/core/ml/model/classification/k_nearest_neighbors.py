@@ -4,7 +4,7 @@ from autoop.core.ml.model.model import Model
 
 
 class KNearestNeighbors(Model):
-    """Class of KNN (K Nearest Neighbours) model."""
+    """Class of KNN (K Nearest Neighbors) model."""
 
     def __init__(self, k: int = 3) -> None:
         """
@@ -60,8 +60,8 @@ class KNearestNeighbors(Model):
         """
         return [self._predict_single(feature) for feature in features]
 
-    # TODO: Return nparray for simplicity
-    # self._k does not excist.
+    # TODO: Return ndarray for simplicity
+    # self._k does not exist.
     def _predict_single(self, feature: np.ndarray) -> np.str_:
         """
         Predict the truth from a single array.
