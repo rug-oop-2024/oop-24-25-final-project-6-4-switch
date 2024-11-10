@@ -14,7 +14,7 @@ from typing import Literal, Dict
 
 
 def list_models(type: Literal["regression",
-                             "classification"]) -> Dict[str, "Model"]:
+                              "classification"]) -> Dict[str, "Model"]:
     """
     Get list of models that fit the type of target feature.
 
