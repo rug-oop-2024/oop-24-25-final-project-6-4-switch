@@ -41,6 +41,7 @@ class NaiveBayes(Model):
         """
         classes, class_counts = np.unique(labels, return_counts=True)
         feature_probs = []
+        labels = np.argmax(labels, axis=1)
 
         for c in classes:
             class_data = features[labels == c]
@@ -51,7 +52,7 @@ class NaiveBayes(Model):
 
         self.parameters = {
             "class_probabilities": class_counts / len(labels),
-            "feature_probabilities": np.ndarray(feature_probs)
+            "feature_probabilities": np.array(feature_probs)
         }
         self.is_fitted = True
 
@@ -86,6 +87,6 @@ class NaiveBayes(Model):
                 features, axis=1)
             log_probs.append(log_prob)
 
-        log_probs = np.ndarray(log_probs)
+        log_probs = np.array(log_probs)
 
         return np.argmax(log_probs, axis=0)
