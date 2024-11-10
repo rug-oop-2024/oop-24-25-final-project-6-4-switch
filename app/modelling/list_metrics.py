@@ -15,7 +15,7 @@ def list_metrics(type: Literal["regression",
     Get list of models that fit the type of target feature.
 
     Arguments:
-        Type (Literal["regression", "classification"]): type of target colum.
+        Type (Literal["regression", "classification"]): type of target column.
 
     Returns:
         list of model that fit the target feature.
