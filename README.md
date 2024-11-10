@@ -20,7 +20,6 @@ We highly encourage you to go beyond the requirements and implement additional f
 1. `Modifiability`: The code should be easy to modify and extend. You should be able to add new features without having to rewrite the entire codebase or heavy refactoring.
    *Important*: We prefer that you do not use libraries or frameworks for this reason. We want to see how you structure your code and how you solve problems. Furthermore, many of the tools available may not be customisable enough for our needs.
    Hence, if you want to include a library, please make sure to justify it.
-
 2. `Testability`: The code should be easy to test. You should be able to write unit tests for the code.
 3. `Readability`: The code should be easy to read. You should be able to understand what the code does without having to spend a lot of time on it.
 4. `Performance`: The code should be fast. You should be able to run the code on a low-end machine without any problems.
@@ -95,11 +94,11 @@ E.g. docs/decisions/DSC-0001-use-typescript.md
 Some examples include housing prices, second-hand cars, etc.
 
 ### Checklist
-- [ ] I have read the instructions carefully.
-- [ ] I have filled my personal rubric.
-- [ ] The code is refactored to style standards.
-- [ ] I have passed my tests.
-- [ ] I have documented my code and decisions.
+- [x] I have read the instructions carefully.
+- [x] I have filled my personal rubric.
+- [x] The code is refactored to style standards.
+- [x] I have passed my tests.
+- [x] I have documented my code and decisions.
 
 # Grading & Submission (IMPORTANT)
 
@@ -152,33 +151,33 @@ If the feature has been implemented by both students, write `both`.
 If you did not implement the feature
 
 | Requirement                           | Type (FN/NF) | Implemented by       | Implementation Completed (add X if done) | Comment |
-|-------------------------------------- |--------------|----------------------|--------------------------|---------|         
-| Up-to-date requirements.txt           | NF           |                      |         | |
-| `ML/detect-features`                  | FN           |                      |         | |
-| `ML/artifact`                         | NF           |                      |         | |
-| `ML/feature`                          | NF           |                      |         | |
-| `ML/metric`                           | NF           |                      |         | |
-| `ML/metric/extensions`                | FN           |                      |         | |
-| `ML/model`                            | NF           |                      |         | |
-| `ML/model/extensions`                 | FN           |                      |         | |
-| `ML/pipeline/evaluation`              | FN           |                      |         | | 
-| `ST/page/datasets`                    | NF           |                      |         | |
-| `ST/datasets/management/create`       | FN           |                      |         | |
-| `ST/datasets/management/save`         | FN           |                      |         | |
-| `ST/page/modelling`                   | NF           |                      |         | |
-| `ST/modelling/datasets/list`          | FN           |                      |         | |
-| `ST/modelling/datasets/features`      | FN           |                      |         | |
-| `ST/modelling/models`                 | FN           |                      |         | |
-| `ST/modelling/pipeline/split`         | FN           |                      |         | |
-| `ST/modelling/pipeline/metrics`       | FN           |                      |         | |
-| `ST/modelling/pipeline/summary`       | FN           |                      |         | |
-| `ST/modelling/pipeline/train`         | FN           |                      |         | |
-| `ST/modelling/pipeline/save`          | FN           |                      |         | |
-| `ST/page/deployment`                  | FN           |                      |         | |
-| `ST/deployment/load`                  | FN           |                      |         | |
-| `ST/deployment/predict`               | FN           |                      |         | |
+|-------------------------------------- |--------------|----------------------|------------------------------------------|---------|
+|`Up-to-date requirements.txt`          |NF            |Both|X                                        |Reflected for Linux and Windows|
+|`ML/detect-features`                   |FN            |Marcus Persson|X||
+|`ML/artifact`                          |FN            |Marcus Persson|X||
+|`ML/feature`                           |NF            |Marcus Persson|X||
+|`ML/metric`                            |FN            |Marcus Persson        |X||
+|`ML/metric/extensions`                 |FN            |Marcus Persson        |X|"mean_squared_error", "mean_absolute_error", "r_squared", "accuracy", "precision","log_loss"|
+|`ML/model`                             |NF            |Marcus Persson        |X||
+|`ML/model/extensions`                  |FN            |Marcus Persson        |X|"k_nearest_neighbors", "naive_bayes", "logistic_regression", "decision_tree", "multiple_linear_regression","random_forest"|
+|`ML/pipeline/evaluation`               |FN            |Marcus Persson        |X|All good. Pipeline tests work.|
+| `ST/page/datasets`                    |NF            |Jia Hao Zhang         |X        |Basic dataset viewing and saving seems to work.|
+| `ST/datasets/management/create`       |FN            |Jia Hao Zhang         |X        |it does create new dataset fro now. needs more testing and seeing how to do it properly later.|
+|`ST/datasets/management/save`          |FN            |Jia Hao Zhang         |X        |Windows friendly now - Marcus|
+|`ST/page/modelling`                    |NF            |Jia Hao Zhang         |X        |partially done. |
+|`ST/modelling/datasets/list`           |FN            |Jia Hao Zhang         |X        |made this feature to turn artifacts into datasets|
+|`ST/modelling/datasets/features`       |FN            |Jia Hao Zhang         |X        |Just used the detect features directly instead of making a new wrapper. |
+|`ST/modelling/models`                  |FN            |Jia Hao Zhang         |X        |There is a way to get the models depending on target cilum type |
+|`ST/modelling/pipeline/split`          |FN            |Jia Hao Zhang         |X        |this is just a wdiget not a whole module |
+|`ST/modelling/pipeline/metrics`        |FN            |Jia Hao Zhang         |X        |there is a way to get metrics depending on target type |
+|`ST/modelling/pipeline/summary`        |FN            |Jia Hao Zhang         |X        |It does show a summary, but somehow model is still none |
+|`ST/modelling/pipeline/train`          |FN            |Jia Hao Zhang         |X        |this seems to work for regression fro now atleast for the ones where the data fits the model. class model still don't work  |
+|`ST/modelling/pipeline/save`           |FN            |Jia Hao Zhang         |||
+|`ST/page/deployment`                   |FN            |                      |         | |
+|`ST/deployment/load`                   |FN            |                      |         | |
+|`ST/deployment/predict`                |FN            |                      |         | |
 
 If you add extra features, please indicate them below:
 | Requirement                           | Type (FN/NF) | Implemented by       | Implementation Completed (add X if done) | Comment |
 |-------------------------------------- |--------------|----------------------|---------|-----|
-|           |            |                      |         | |
+|                                       |              |                      |         | |

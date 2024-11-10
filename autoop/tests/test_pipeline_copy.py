@@ -6,8 +6,8 @@ from autoop.core.ml.pipeline import Pipeline
 from autoop.core.ml.dataset import Dataset
 from autoop.core.ml.feature import Feature
 from autoop.functional.feature import detect_feature_types
-from autoop.core.ml.model.regression import MultipleLinearRegression
-from autoop.core.ml.metric import MeanSquaredError
+from autoop.core.ml.model.classification import NaiveBayes
+from autoop.core.ml.metric import MeanAbsoluteError
 
 
 class TestPipeline(unittest.TestCase):
@@ -26,11 +26,11 @@ class TestPipeline(unittest.TestCase):
         self.features = detect_feature_types(self.dataset)
         self.pipeline = Pipeline(
             dataset=self.dataset,
-            model=MultipleLinearRegression(),
+            model=NaiveBayes(),
             input_features=list(filter(lambda x: x.name != "age",
                                        self.features)),
-            target_feature=Feature(name="age", type="numerical"),
-            metrics=[MeanSquaredError()],
+            target_feature=Feature(name="age", type="categorical"),
+            metrics=[MeanAbsoluteError()],
             split=0.8
         )
         self.ds_size = data.data.shape[0]

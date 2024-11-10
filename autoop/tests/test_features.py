@@ -2,9 +2,10 @@ import unittest
 from sklearn.datasets import load_iris, fetch_openml
 import pandas as pd
 
-from autoop.core.ml.dataset import Dataset
-from autoop.core.ml.feature import Feature
-from autoop.functional.feature import detect_feature_types
+from autoop.core.ml.dataset import Dataset  # noqa : E402
+from autoop.core.ml.feature import Feature  # noqa : E402
+from autoop.functional.feature import detect_feature_types  # noqa : E402
+
 
 class TestFeatures(unittest.TestCase):
 
@@ -31,7 +32,7 @@ class TestFeatures(unittest.TestCase):
             self.assertIsInstance(feature, Feature)
             self.assertEqual(feature.name in iris.feature_names, True)
             self.assertEqual(feature.type, "numerical")
-        
+
     def test_detect_features_with_categories(self):
         data = fetch_openml(name="adult", version=1, parser="auto")
         df = pd.DataFrame(
@@ -66,7 +67,17 @@ class TestFeatures(unittest.TestCase):
         for feature in features:
             self.assertIsInstance(feature, Feature)
             self.assertEqual(feature.name in data.feature_names, True)
-        for detected_feature in filter(lambda x: x.name in numerical_columns, features):
+        for detected_feature in filter(lambda x: x.name in numerical_columns,
+                                       features):
             self.assertEqual(detected_feature.type, "numerical")
-        for detected_feature in filter(lambda x: x.name in categorical_columns, features):
+        for detected_feature in filter(lambda x: x.name in categorical_columns,
+                                       features):
             self.assertEqual(detected_feature.type, "categorical")
+
+
+def main():
+    unittest.main()
+
+
+if __name__ == '__main__':
+    main()
