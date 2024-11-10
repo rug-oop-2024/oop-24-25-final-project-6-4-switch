@@ -42,7 +42,7 @@ class KNearestNeighbors(Model):
         """
         self.parameters = {
             "features": features,
-            "labels": labels
+            "labels": np.argmax(labels, axis=1)
         }
         self.is_fitted = True
 
@@ -80,11 +80,21 @@ class KNearestNeighbors(Model):
         str_
             Predicted label.
         """
-        distance = np.linalg.norm(self.parameters["features"] - feature,
-                                  axis=1)
-        indices = np.argsort(distance)[: self.hyper_parameters["k"]]
-        nearest_label = [self.parameters["labels"][i][0]
-                         for i in indices]
-        most_common = Counter(nearest_label).most_common()
+        distance = np.linalg.norm(self.parameters["features"] - feature, axis=1)
 
-        return most_common[0][0]
+        indices = np.argsort(distance)[:self.hyper_parameters["k"]]
+
+        nearest_labels = [self.parameters["labels"][i] for i in indices]
+
+        label_counts = Counter(nearest_labels)
+
+        unique_labels = np.unique(self.parameters["labels"])
+
+        probabilities = np.zeros(len(unique_labels))
+
+        total_neighbors = self.hyper_parameters["k"]
+        for label, count in label_counts.items():
+            label_index = np.where(unique_labels == label)[0][0]
+            probabilities[label_index] = count / total_neighbors
+
+        return probabilities
