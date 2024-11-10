@@ -20,7 +20,6 @@ We highly encourage you to go beyond the requirements and implement additional f
 1. `Modifiability`: The code should be easy to modify and extend. You should be able to add new features without having to rewrite the entire codebase or heavy refactoring.
    *Important*: We prefer that you do not use libraries or frameworks for this reason. We want to see how you structure your code and how you solve problems. Furthermore, many of the tools available may not be customisable enough for our needs.
    Hence, if you want to include a library, please make sure to justify it.
-
 2. `Testability`: The code should be easy to test. You should be able to write unit tests for the code.
 3. `Readability`: The code should be easy to read. You should be able to understand what the code does without having to spend a lot of time on it.
 4. `Performance`: The code should be fast. You should be able to run the code on a low-end machine without any problems.
