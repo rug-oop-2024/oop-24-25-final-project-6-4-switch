@@ -163,7 +163,7 @@ If you did not implement the feature
 |`ML/pipeline/evaluation`               |FN            |Marcus Persson        |X|All good. Pipeline tests work.|
 | `ST/page/datasets`                    |NF            |Jia Hao Zhang         |X        |Basic dataset viewing and saving seems to work.|
 | `ST/datasets/management/create`       |FN            |Jia Hao Zhang         |X        |it does create new dataset fro now. needs more testing and seeing how to do it properly later.|
-|`ST/datasets/management/save`          |FN            |Jia Hao Zhang         |X        |It saves the dataset. no idea if it properly done. only confirmed to that you can get to the data from dataset class data for previewing. |
+|`ST/datasets/management/save`          |FN            |Jia Hao Zhang         |X        |Windows friendly now - Marcus|
 |`ST/page/modelling`                    |NF            |Jia Hao Zhang         |X        |partially done. |
 |`ST/modelling/datasets/list`           |FN            |Jia Hao Zhang         |X        |made this feature to turn artifacts into datasets|
 |`ST/modelling/datasets/features`       |FN            |Jia Hao Zhang         |X        |Just used the detect features directly instead of making a new wrapper. |
@@ -172,7 +172,7 @@ If you did not implement the feature
 |`ST/modelling/pipeline/metrics`        |FN            |Jia Hao Zhang         |X        |there is a way to get metrics depending on target type |
 |`ST/modelling/pipeline/summary`        |FN            |Jia Hao Zhang         |X        |It does show a summary, but somehow model is still none |
 |`ST/modelling/pipeline/train`          |FN            |Jia Hao Zhang         |X        |this seems to work for regression fro now atleast for the ones where the data fits the model. class model still don't work  |
-|`ST/modelling/pipeline/save`           |FN            |Jia Hao Zhang         |X|Windows friendly now - Marcus|
+|`ST/modelling/pipeline/save`           |FN            |Jia Hao Zhang         |||
 |`ST/page/deployment`                   |FN            |                      |         | |
 |`ST/deployment/load`                   |FN            |                      |         | |
 |`ST/deployment/predict`                |FN            |                      |         | |
