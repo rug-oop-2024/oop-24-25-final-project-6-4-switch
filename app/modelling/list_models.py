@@ -27,7 +27,7 @@ def list_models(type: Literal["regression",
     match type:
         case "classification":
             return {"K Nearest Neighbors": KNearestNeighbors,
-                    "Linear Discriminant Analysis": NaiveBayes,
+                    "Naive Bayes": NaiveBayes,
                     "Logistic Regression": LogisticRegression}
         case "regression":
             return {"Decision Tree": DecisionTree,

@@ -51,137 +51,148 @@ datasets: list["Dataset"] = list_dataset(automl.registry.list(type="dataset"))
 selected_dataset = st.selectbox("Select dataset to model",
                                 datasets)
 
-feature_list: list["Feature"] = detect_feature_types(selected_dataset)
+if selected_dataset is not None:
+    feature_list: list["Feature"] = detect_feature_types(selected_dataset)
 
-target_colum: "Feature" = st.selectbox("select target feature",
-                                       feature_list,
-                                       index=None)
+    target_colum: "Feature" = st.selectbox("select target feature",
+                                        feature_list,
+                                        index=None)
 
-input_features: list["Feature"] | None = st.multiselect(
-    "select inout features",
-    [feature for feature in feature_list if feature != target_colum],
-    default=None)
+    input_features: list["Feature"] | None = st.multiselect(
+        "select inout features",
+        [feature for feature in feature_list if feature != target_colum],
+        default=None)
 
-task_type: str = get_task_type(target_colum)
+    task_type: str = get_task_type(target_colum)
 
-st.write(f"Detected task type is {task_type}.")
+    st.write(f"Detected task type is {task_type}.")
 
-if target_colum is not None and input_features not in [None, []]:
-    split: float = st.slider("Select split in dataset.",
-                             min_value=0.1,
-                             max_value=0.9,
-                             value=0.8)
+    if target_colum is not None and input_features not in [None, []]:
+        split: float = st.slider("Select split in dataset.",
+                                min_value=0.1,
+                                max_value=0.9,
+                                value=0.8)
 
-    dictionary_models: dict[str, "Model"] = list_models(task_type)
-    model_key: str | None = st.selectbox("select model.",
-                                         dictionary_models.keys(),
-                                         index=None)
+        dictionary_models: dict[str, "Model"] = list_models(task_type)
+        model_key: str | None = st.selectbox("select model.",
+                                            dictionary_models.keys(),
+                                            index=None)
 
-    metrics: list["Metric"] | None = st.multiselect("select metrics.",
-                                                    list_metrics(task_type),
-                                                    default=None)
+        metrics: list["Metric"] | None = st.multiselect(
+            "select metrics.",
+            list_metrics(task_type),
+            default=None)
 
-    if model_key is not None and metrics not in [None, []]:
-        instanced_model: "Model" = None
-        uninstanced_model: "Model" = dictionary_models[model_key]
+        if model_key is not None and metrics not in [None, []]:
+            instanced_model: "Model" = None
+            uninstanced_model: "Model" = dictionary_models[model_key]
 
-        if st.checkbox("Use custom arguments?"):
-            match model_key:
-                case "K Nearest Neighbors":
-                    instanced_model = uninstanced_model(
-                        st.number_input(
-                            "k value - the amount of neighbors chosen.",
-                            min_value=3,
-                            step=1,
-                            value=3
-                        ))
+            if st.checkbox("Use custom arguments?"):
+                match model_key:
+                    case "K Nearest Neighbors":
+                        instanced_model = uninstanced_model(
+                            st.number_input(
+                                "k value - the amount of neighbors chosen.",
+                                min_value=3,
+                                step=1,
+                                value=3
+                            ))
 
-                case "Logistic Regression":
-                    instanced_model = uninstanced_model(
-                        st.number_input(
-                            "Learning rate for gradient descent.",
-                            min_value=0.001,
-                            step=0.001,
-                            value=0.01),
-                        st.number_input(
-                            "Number of iterations for gradient descent.",
-                            value=1000,
-                            min_value=1,
-                            step=1
-                        ))
+                    case "Logistic Regression":
+                        instanced_model = uninstanced_model(
+                            st.number_input(
+                                "Learning rate for gradient descent.",
+                                min_value=0.001,
+                                step=0.001,
+                                value=0.01),
+                            st.number_input(
+                                "Number of iterations for gradient descent.",
+                                value=1000,
+                                min_value=1,
+                                step=1
+                            ))
 
-                case "Decision Tree":
-                    instanced_model = uninstanced_model(
-                        st.number_input(
-                            "Maximum depth of the tree.",
-                            min_value=1
-                        ))
+                    case "Decision Tree":
+                        instanced_model = uninstanced_model(
+                            st.number_input(
+                                "Maximum depth of the tree.",
+                                min_value=1
+                            ))
 
-                case "Multiple Linear Regression":
-                    instanced_model = uninstanced_model(
-                        st.number_input(
-                            "Regularization strength.",
-                            value=0.0,
-                            min_value=0.0
-                        ))
+                    case "Multiple Linear Regression":
+                        instanced_model = uninstanced_model(
+                            st.number_input(
+                                "Regularization strength.",
+                                value=0.0,
+                                min_value=0.0
+                            ))
 
-                case "Random Forest":
-                    instanced_model = uninstanced_model(
-                        st.number_input(
-                            "Number of trees in the forest.",
-                            value=10,
-                            min_value=10,
-                            step=1),
-                        st.number_input(
-                            "Maximum depth per tree.",
-                            min_value=1,
-                            step=1
-                        ))
+                    case "Random Forest":
+                        instanced_model = uninstanced_model(
+                            st.number_input(
+                                "Number of trees in the forest.",
+                                value=10,
+                                min_value=10,
+                                step=1),
+                            st.number_input(
+                                "Maximum depth per tree.",
+                                min_value=1,
+                                step=1
+                            ))
+                    case "Naive Bayes":
+                        instanced_model = uninstanced_model(
+                            st.number_input(
+                                "Laplace smoothing parameter.",
+                                value=1.0,
+                                min_value=0.0
+                            )
+                        )
 
-                case _:
-                    st.write("No arguments to customize.")
-                    instanced_model = uninstanced_model()
-        else:
-            instanced_model = uninstanced_model()
+                    case _:
+                        st.write("No arguments to customize.")
+                        instanced_model = uninstanced_model()
+            else:
+                instanced_model = uninstanced_model()
 
-        if instanced_model is not None:
-            pipeline: Pipeline = Pipeline(
-                metrics,
-                selected_dataset,
-                instanced_model,
-                input_features,
-                target_colum,
-                split)
+            if instanced_model is not None:
+                pipeline: Pipeline = Pipeline(
+                    metrics,
+                    selected_dataset,
+                    instanced_model,
+                    input_features,
+                    target_colum,
+                    split)
 
-            st.write(pipeline)
+                st.write(pipeline)
 
-            if st.checkbox("auto train train."):
-                pipeline_result: dict = pipeline.execute()
+                if st.checkbox("auto train train."):
+                    pipeline_result: dict = pipeline.execute()
 
-                pipeline_result_keys: list[str] = list(pipeline_result.keys())
+                    pipeline_result_keys: list[str] = list(
+                        pipeline_result.keys())
 
-                text: list[str] = ["metrics of the pipeline:",
-                                   "metric results of pipeline:",
-                                   "predictions of the pipeline:"]
+                    text: list[str] = ["metrics of the pipeline:",
+                                    "metric results of pipeline:",
+                                    "predictions of the pipeline:"]
 
-                for text, key in zip(text, pipeline_result_keys):
-                    st.write(text)
-                    st.dataframe(pipeline_result[key])
+                    for text, key in zip(text, pipeline_result_keys):
+                        st.write(text)
+                        st.dataframe(pipeline_result[key])
 
-                version = st.text_input("version number of dataset.",
-                                        help="format is 1.1.1")
-                pipeline_name = st.text_input("name of the pipeline")
+                    version = st.text_input("version number of dataset.",
+                                            help="format is 1.1.1")
+                    pipeline_name = st.text_input("name of the pipeline")
 
-                # TODO finish saving
-                if (st.button("save Pipeline?") and
-                    (version == "" or len(version.split(".")) == 3) and
-                        pipeline_name is not None):
-                    central_pipeline_artifact = save_pipeline(pipeline,
-                                                              version,
-                                                              pipeline_name)
+                    # TODO finish saving
+                    if (st.button("save Pipeline?") and
+                        (version == "" or len(version.split(".")) == 3) and
+                            pipeline_name is not None):
+                        central_pipeline_artifact = save_pipeline(pipeline,
+                                                                version,
+                                                                pipeline_name)
 
-                    automl.registry.register(central_pipeline_artifact)
-                    for artifact in pipeline.artifacts:
-                        automl.registry.register(artifact)
+                        automl.registry.register(central_pipeline_artifact)
+                        for artifact in pipeline.artifacts:
+                            automl.registry.register(artifact)
 
-                    st.write('Pipeline saved')
+                        st.write('Pipeline saved')

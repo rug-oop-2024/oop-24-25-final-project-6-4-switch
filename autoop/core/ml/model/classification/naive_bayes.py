@@ -21,6 +21,8 @@ class NaiveBayes(Model):
         super().__init__()
         self.hyper_parameters = {"smoothing": smoothing}
         self.is_fitted = False
+        self.type = "classification"
+        self.name = "Naive Bayes"
 
     def fit(self, features: np.ndarray, labels: np.ndarray) -> None:
         """
