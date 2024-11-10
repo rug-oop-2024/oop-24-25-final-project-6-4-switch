@@ -9,7 +9,7 @@ from autoop.core.ml.metric import (
     LogLoss)
 
 
-def get_metrics(type: Literal["regression", "classification"]) -> list[Metric]:
+def list_metrics(type: Literal["regression", "classification"]) -> list[Metric]:
     """
     Get list of models that fit the type of target feature.
 
