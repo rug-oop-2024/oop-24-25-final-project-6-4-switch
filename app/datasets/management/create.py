@@ -17,13 +17,13 @@ def create(file: IO, version: str) -> Dataset:
     if version == "":
         dataset = Dataset.from_dataframe(
             pd.read_csv(file),
-            file.name + "_1.0.0",
-            asset_path=f"{file.name}_1.0.0")
+            file.name[:-4] + "_1.0.0",
+            asset_path=f"{file.name[:-4]}_1.0.0.csv")
     else:
         dataset = Dataset.from_dataframe(
             pd.read_csv(file),
-            file.name + f"_{version}",
-            asset_path=f"{file.name}_{version}",
+            file.name[:-4] + f"_{version}",
+            asset_path=f"{file.name[:-4]}_{version}.csv",
             version=version)
 
     return dataset
