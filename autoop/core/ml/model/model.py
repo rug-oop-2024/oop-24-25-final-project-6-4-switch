@@ -175,5 +175,7 @@ class Model(ABC, Artifact):
         self.name = name
         self.data = {"parameters": self._parameters,
                      "hyperparameters": self._hyper_parameters}
+        self.asset_path = f"model{name}"
+        self.version = "model"
 
         return self
