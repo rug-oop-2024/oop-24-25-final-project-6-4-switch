@@ -6,7 +6,7 @@ from app.core.system import AutoMLSystem
 from app.datasets.list import list_dataset
 
 from app.modelling.list_models import list_models
-from app.modelling.list_metrics import get_metrics
+from app.modelling.list_metrics import list_metrics
 from app.modelling.save import save_pipeline
 from app.modelling.task_type import get_task_type
 
@@ -78,7 +78,7 @@ if target_colum is not None and input_features not in [None, []]:
                                          index=None)
 
     metrics: list["Metric"] | None = st.multiselect("select metrics.",
-                                                    get_metrics(task_type),
+                                                    list_metrics(task_type),
                                                     default=None)
 
     if model_key is not None and metrics not in [None, []]:

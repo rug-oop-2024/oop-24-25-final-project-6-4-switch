@@ -1,8 +1,11 @@
-from abc import abstractmethod, ABC
-from autoop.core.ml.artifact import Artifact
 import numpy as np
+
+from abc import abstractmethod, ABC
 from copy import deepcopy
 from pydantic import PrivateAttr
+from typing import Dict
+
+from autoop.core.ml.artifact import Artifact
 
 
 class Model(ABC, Artifact):
@@ -58,7 +61,7 @@ class Model(ABC, Artifact):
         ...
 
     @property
-    def parameters(self) -> dict[str: np.ndarray]:
+    def parameters(self) -> Dict[str, np.ndarray]:
         """
         Get strict parameters essential for prediction.
 
@@ -93,7 +96,7 @@ class Model(ABC, Artifact):
         self._parameters = parameters
 
     @property
-    def hyper_parameters(self) -> dict[str: float]:
+    def hyper_parameters(self) -> Dict[str, float]:
         """
         Get hyperparameters useful for training.
 
@@ -162,4 +165,15 @@ class Model(ABC, Artifact):
             raise TypeError("is_fitted must be a bool.")
         self._is_fitted = is_fitted
 
-    # TODO: to artifact method
+    def to_artifact(self, name: str) -> "Model":
+        """
+        Prepare the model to be an artifact.
+
+        Returns:
+        the model itself with the artifact attributes filled out.
+        """
+        self.name = name
+        self.data = {"parameters": self._parameters,
+                     "hyperparameters": self._hyper_parameters}
+
+        return self

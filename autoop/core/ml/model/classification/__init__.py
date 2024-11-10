@@ -7,3 +7,6 @@ from autoop.core.ml.model.classification.k_nearest_neighbors import (
 from autoop.core.ml.model.classification.logistic_regression import (
     LogisticRegression
 )
+
+print(f"{NaiveBayes()}, {KNearestNeighbors()}, " +
+      f"{LogisticRegression()} have been successfully imported")

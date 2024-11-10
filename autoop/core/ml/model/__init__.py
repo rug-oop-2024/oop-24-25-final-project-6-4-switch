@@ -1,3 +1,5 @@
+"""Imports and gets all sub modules derived from model."""
+
 from autoop.core.ml.model.model import Model
 from autoop.core.ml.model.regression import (
     DecisionTree,

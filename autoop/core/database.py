@@ -7,8 +7,15 @@ from autoop.core.storage import Storage
 
 
 class Database():
+    """Database class for managing and storing all the data."""
 
     def __init__(self, storage: Storage) -> None:
+        """Initialize Database class fro storing all data.
+
+        Args:
+            storage (Storage): The storage module that the database should be
+            stored in.
+        """
         self._storage = storage
         self._data = {}
         self._load()
@@ -56,6 +63,12 @@ class Database():
             return
         if self._data[collection].get(id, None):
             del self._data[collection][id]
+
+        # deletes all current meta data
+        for collection in set(self._data.keys()):
+            for file in self._storage.list(f"{collection}"):
+                self._storage.delete(file)
+
         self._persist()
 
     def list(self, collection: str) -> List[Tuple[str, dict]]:
@@ -76,11 +89,6 @@ class Database():
 
     def _persist(self) -> None:
         """Persist the data to storage"""
-        # deletes all current meta data
-        for collection in set(self._data.keys()):
-            for file in self._storage.list(f"{collection}"):
-                self._storage.delete(file)
-
         for collection, data in self._data.items():
             if not data:
                 continue
