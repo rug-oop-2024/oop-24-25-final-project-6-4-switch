@@ -12,7 +12,7 @@ class ArtifactRegistry():
                  database: Database,
                  storage: Storage) -> None:
         """
-        Initialize Artifactregistry class
+        Initialize Artifact registry class
 
         Arguments:
             database (Database): Database for the registry to look for datasets
@@ -26,7 +26,7 @@ class ArtifactRegistry():
 
     def register(self, artifact: Artifact) -> None:
         """
-        Register artifact into artifactregistry
+        Register artifact into artifact registry
 
         Arguments:
             artifact (Artifact): artifact to be registered into the registry.
@@ -52,7 +52,7 @@ class ArtifactRegistry():
         Get list of artifacts of a certain type.
 
         Arguments:
-            type (str): type of artifacts to get from artifactregistry.
+            type (str): type of artifacts to get from artifact registry.
 
         Returns:
             list of artifacts of the type from artifact registry.
@@ -79,10 +79,10 @@ class ArtifactRegistry():
         Get artifact from registry with id.
 
         Arguments:
-            artifact_id (str): artifact id to get from the artifactregistry.
+            artifact_id (str): artifact id to get from the artifact registry.
 
         Returns:
-            artifact from artifactregistry that matches the id.
+            artifact from artifact registry that matches the id.
         """
         data = self._database.get("artifacts", artifact_id)
         return Artifact(
@@ -97,7 +97,7 @@ class ArtifactRegistry():
 
     def delete(self, artifact_id: str) -> None:
         """
-        Delete artifact from artifactregistry.
+        Delete artifact from artifact registry.
 
         Arguments;
             artifact_id (str): id of the artifact you want to delete.
@@ -119,7 +119,7 @@ class AutoMLSystem:
         Initialize AutoMLSystem class.
 
         Arguments:
-            storage (LocalStorage): Storage lcoaltion for AutoMLStestem.
+            storage (LocalStorage): Storage location for AutoMLSystem.
             database (Database): Database class which manages all datasets.
 
         Returns:

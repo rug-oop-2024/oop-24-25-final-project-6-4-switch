@@ -6,7 +6,7 @@ from pydantic import PrivateAttr
 
 
 class Model(ABC, Artifact):
-    """Base class for regression and clasification models."""
+    """Base class for regression and classification models."""
 
     _parameters: dict = PrivateAttr(default={})
     _hyper_parameters: dict = PrivateAttr(default={})

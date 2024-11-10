@@ -10,7 +10,7 @@ def save_pipeline(pipeline: Pipeline, name: str, version: str) -> Artifact:
         pipeline (Pipeline): pipeline to be saved
 
     returns:
-        the cerntral artifact of the pipeline to be saved.
+        the central artifact of the pipeline to be saved.
     """
     pipeline_artifacts = pipeline.artifacts
 

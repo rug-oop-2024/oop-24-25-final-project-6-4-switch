@@ -39,7 +39,7 @@ if uploaded_file is not None:
     st.dataframe(pd.read_csv(deepcopy(uploaded_file)))
 else:
     # view and delete mode.
-    # if there are no new data uplaoded
+    # if there are no new data uploaded
     view_dataset = st.selectbox("select dataset to preview.",
                                 list_dataset(
                                     automl.registry.list(type="dataset")),

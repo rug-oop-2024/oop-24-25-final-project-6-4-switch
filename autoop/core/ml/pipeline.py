@@ -28,9 +28,9 @@ class Pipeline():
             metrics (List[Metrics]): list of metrics for in this pipeline.
             dataset (Dataset): Dataset for the this pipeline to fit.
             model (Model): Regression or prediction model for this pipeline.
-            input_featires (List[Feature]): List of features in dataset to
-            use as independen variables.
-            target_feature (Feature): Feature that this pipeline shoudl target
+            input_features (List[Feature]): List of features in dataset to
+            use as independent variables.
+            target_feature (Feature): Feature that this pipeline should target
             regressing or predicting
             split (float): The split of data to training and testing.
 
@@ -119,7 +119,7 @@ class Pipeline():
     def _register_artifact(self, name: str, artifact: Artifact) -> None:
         """Registers artifact to an dictionary of artifacts.
 
-        Agruments:
+        Arguments:
             name (str): Name od the artifact to be registered.
             artifact (Artifact): artifact that is to be registered.
 
@@ -178,7 +178,7 @@ class Pipeline():
         data splitting, training, and evaluation.
 
         This method performs the following steps:
-        1. Preprocesses features required for training.
+        1. Preprocessed features required for training.
         2. Splits the data into training and test sets.
         3. Trains the model on the training data.
         4. Evaluates the model on the test set.
