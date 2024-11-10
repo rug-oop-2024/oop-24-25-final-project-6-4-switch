@@ -5,12 +5,15 @@ from autoop.core.ml.model.regression import (
     DecisionTree,
     MultipleLinearRegression,
     RandomForest
-) # noqa
+)
 from autoop.core.ml.model.classification import (
     NaiveBayes,
     KNearestNeighbors,
     LogisticRegression
-) # noqa
+)
+
+(DecisionTree(), MultipleLinearRegression(), RandomForest(),
+ NaiveBayes(), KNearestNeighbors(), LogisticRegression())
 
 REGRESSION_MODELS = [
     "decision_tree",
@@ -55,4 +58,4 @@ def get_model(name: str) -> "Model":
         except TypeError:
             raise NotImplementedError(f"{name} is not implemented.")
     else:
-        raise ValueError(f"{name} is possibly mispelt.")
+        raise ValueError(f"{name} is possibly misspelt.")
