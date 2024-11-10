@@ -46,8 +46,8 @@ class Artifact(BaseModel):
         # To be OS-friendly, our id replaces the colon (:)
         # with an underscore (_).
         if platform.system() == 'Linux':
-            return f"{base64.b64encode(self.asset_path.encode())}:" +
-        f"{self.version}"
+            return (f"{base64.b64encode(self.asset_path.encode())}:" +
+                    f"{self.version}")
 
         return f"{base64.b64encode(self.asset_path.encode())}_{self.version}"
 
