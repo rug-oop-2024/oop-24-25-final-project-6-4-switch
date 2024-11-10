@@ -44,7 +44,7 @@ def get_metric(name: str) -> "Metric":
         except TypeError:
             raise NotImplementedError(f"{class_name} is not implemented.")
     else:
-        raise ValueError(f"{name} is possibly mispelt.")
+        raise ValueError(f"{name} is possibly misspelt.")
 
 
 class Metric(ABC):
@@ -80,7 +80,7 @@ class Metric(ABC):
 
         Returns
         -------
-        String of the repsensentation of this metric.
+        String of the representation of this metric.
         """
         pass
 
@@ -275,7 +275,7 @@ class Precision(Metric):
 
 
 class LogLoss(Metric):
-    """Logarithmic Loss implemenation for classication."""
+    """Logarithmic Loss implementation for classification."""
 
     def __call__(self, truth: np.ndarray, pred: np.ndarray) -> float:
         """
