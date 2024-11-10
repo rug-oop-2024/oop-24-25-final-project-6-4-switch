@@ -56,6 +56,12 @@ class Database():
             return
         if self._data[collection].get(id, None):
             del self._data[collection][id]
+
+        # deletes all current meta data
+        for collection in set(self._data.keys()):
+            for file in self._storage.list(f"{collection}"):
+                self._storage.delete(file)
+
         self._persist()
 
     def list(self, collection: str) -> List[Tuple[str, dict]]:
@@ -76,11 +82,6 @@ class Database():
 
     def _persist(self) -> None:
         """Persist the data to storage"""
-        # deletes all current meta data
-        for collection in set(self._data.keys()):
-            for file in self._storage.list(f"{collection}"):
-                self._storage.delete(file)
-
         for collection, data in self._data.items():
             if not data:
                 continue
