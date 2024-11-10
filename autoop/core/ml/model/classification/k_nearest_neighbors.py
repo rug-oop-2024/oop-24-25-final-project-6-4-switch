@@ -20,7 +20,8 @@ class KNearestNeighbors(Model):
         None
         """
         super().__init__()
-        self.hyper_parameters["k"] = k
+        self.hyper_parameters = {"k": k}
+        self.is_fitted = False
         self.type = "classification"
         self.name = "K Nearest Neighbors"
 
@@ -43,8 +44,9 @@ class KNearestNeighbors(Model):
             "features": features,
             "labels": labels
         }
+        self.is_fitted = True
 
-    def predict(self, features: np.ndarray) -> list[np.str_]:
+    def predict(self, features: np.ndarray) -> np.ndarray:
         """
         Make predictions using the fitted model.
 
@@ -53,15 +55,17 @@ class KNearestNeighbors(Model):
         features : ndarray
             Test features.
 
-        Returns
-        -------
-        list[_str]
-            Predicted labels.
+        Raises
+        ------
+        ValueError
+            If the model has not been trained yet.
         """
-        return [self._predict_single(feature) for feature in features]
+        if not self.is_fitted:
+            raise ValueError("Model has not been trained, fit it first!")
 
-    # TODO: Return ndarray for simplicity
-    # self._k does not exist.
+        return np.ndarray([self._predict_single(feature) for feature
+                           in features])
+
     def _predict_single(self, feature: np.ndarray) -> np.str_:
         """
         Predict the truth from a single array.
@@ -73,17 +77,12 @@ class KNearestNeighbors(Model):
 
         Returns
         -------
-        str_ : String of truth.
+        str_
+            Predicted label.
         """
-        np.sqrt(
-            [
-                np.sum((feature - observation_) ** 2)
-                for observation_ in self.parameters["features"]
-            ]
-        )
         distance = np.linalg.norm(self.parameters["features"] - feature,
                                   axis=1)
-        indices = np.argsort(distance)[: self._k]
+        indices = np.argsort(distance)[: self.hyper_parameters["k"]]
         nearest_label = [self.parameters["labels"][i][0]
                          for i in indices]
         most_common = Counter(nearest_label).most_common()

@@ -42,7 +42,7 @@ def get_metric(name: str) -> "Metric":
             # Return class
             return globals()[class_name]()
         except TypeError:
-            raise NotImplementedError(f"{class_name} is not implemented.")
+            raise NotImplementedError(f"{name} is not implemented.")
     else:
         raise ValueError(f"{name} is possibly misspelt.")
 
@@ -80,9 +80,10 @@ class Metric(ABC):
 
         Returns
         -------
-        String of the representation of this metric.
+        str
+            String of the repsensentation of this metric.
         """
-        pass
+        ...
 
 
 # region Regression
@@ -117,7 +118,8 @@ class MeanSquaredError(Metric):
 
         Returns
         -------
-        String of the repsensentation of this metric.
+        str
+            String of the repsensentation of this metric.
         """
         return "Mean Squared Error"
 
@@ -153,7 +155,8 @@ class MeanAbsoluteError(Metric):
 
         Returns
         -------
-        String of the repsensentation of this metric.
+        str
+            String of the repsensentation of this metric.
         """
         return "Mean Absolute Error"
 
@@ -192,7 +195,8 @@ class RSquared(Metric):
 
         Returns
         -------
-        String of the repsensentation of this metric.
+        str
+            String of the repsensentation of this metric.
         """
         return "R Squared"
 # endregion
@@ -230,7 +234,8 @@ class Accuracy(Metric):
 
         Returns
         -------
-        String of the repsensentation of this metric.
+        str
+            String of the repsensentation of this metric.
         """
         return "Accuracy"
 
@@ -269,7 +274,8 @@ class Precision(Metric):
 
         Returns
         -------
-        String of the repsensentation of this metric.
+        str
+            String of the repsensentation of this metric.
         """
         return "Precision"
 
@@ -309,7 +315,8 @@ class LogLoss(Metric):
 
         Returns
         -------
-        String of the repsensentation of this metric.
+        str
+            String of the repsensentation of this metric.
         """
         return "Logloss"
 # endregion

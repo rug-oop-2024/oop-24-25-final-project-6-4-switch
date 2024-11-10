@@ -6,7 +6,7 @@ from sklearn.tree import DecisionTreeRegressor
 class RandomForest(Model):
     """Class of random forest model."""
 
-    def __init__(self, trees: int = 10, depth: int = None) -> None:
+    def __init__(self, n_trees: int = 10, depth: int = None) -> None:
         """
         Initialize model.
 
@@ -22,13 +22,12 @@ class RandomForest(Model):
         None
         """
         super().__init__()
-        self._decision_tree = DecisionTreeRegressor()
         self.hyper_parameters = {
-            "trees": trees,
+            "n_trees": n_trees,
             "depth": depth
         }
-        # TODO doesn't see trees as a field and refuses to assign []
-        self.trees = []
+        self.parameters = {"trees": []}
+        self.is_fitted = False
         self.type = "regression"
         self.name = "Random Forest"
 
@@ -47,9 +46,9 @@ class RandomForest(Model):
         -------
         None
         """
-        length = self.hyper_parameters["trees"]
-        self.trees.append(self._fit_single(features, labels)
-                          for _ in range(length))
+        self.parameters["trees"] = [self._fit_single(features, labels) for _ in
+                                    range(self.hyper_parameters["n_trees"])]
+        self.is_fitted = True
 
     def _fit_single(self, features: np.ndarray, labels: np.ndarray) \
             -> "DecisionTreeRegressor":
@@ -67,13 +66,12 @@ class RandomForest(Model):
         -------
         None
         """
-        depth = self.hyper_parameters["depth"]
         indices = np.random.choice(features.shape[0], features.shape[0],
                                    replace=True)
         sample_features = features[indices]
         sample_labels = labels[indices]
 
-        tree = DecisionTreeRegressor(max_depth=depth)
+        tree = DecisionTreeRegressor(max_depth=self.hyper_parameters["depth"])
 
         return tree.fit(sample_features, sample_labels)
 
@@ -90,13 +88,17 @@ class RandomForest(Model):
         -------
         ndarray
             Predicted values.
+
+        Raises
+        ------
+        ValueError
+            If the model has not been trained yet.
         """
-        if not self.trees:
-            raise ValueError("Model is not fitted yet." +
-                             "Please call the fit method first.")
+        if not self.is_fitted:
+            raise ValueError("Model has not been trained, fit it first!")
 
         tree_predictions = np.array([tree.predict(features) for tree in
-                                     self.trees])
+                                     self.parameters["trees"]])
         predictions = np.mean(tree_predictions, axis=0)
 
         return predictions

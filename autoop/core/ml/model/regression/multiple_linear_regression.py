@@ -20,6 +20,7 @@ class MultipleLinearRegression(Model):
         """
         super().__init__()
         self.hyper_parameters = {"alpha": alpha}
+        self.is_fitted = False
         self.type = "regression"
         self.name = "Multiple Linear Regression"
 
@@ -47,6 +48,7 @@ class MultipleLinearRegression(Model):
             raise np.linalg.LinAlgError("Matrix is not invertible with the" +
                                         "added one column at the end.")
         self.parameters = {"weights": inversed_matrix @ squiggle.T @ labels}
+        self.is_fitted = True
 
     def predict(self, features: np.ndarray) -> np.ndarray:
         """
@@ -61,10 +63,14 @@ class MultipleLinearRegression(Model):
         -------
         ndarray
             Predicted values.
+
+        Raises
+        ------
+        ValueError
+            If the model has not been trained yet.
         """
-        if "weights" not in self.parameters:
-            raise ValueError("Model has not been trained." +
-                             "Please call the fit method first.")
+        if not self.is_fitted:
+            raise ValueError("Model has not been trained, fit it first!")
 
         if features.ndim == 1:
             features = features.reshape(1, -1)

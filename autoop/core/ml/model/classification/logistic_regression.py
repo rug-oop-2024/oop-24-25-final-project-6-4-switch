@@ -26,8 +26,7 @@ class LogisticRegression(Model):
             "learning_rate": learning_rate,
             "iterations": iterations
         }
-        self._weights = None
-        self._bias = 0
+        self.is_fitted = False
         self.type = "classification"
         self.name = "Logistic Regression"
 
@@ -47,19 +46,22 @@ class LogisticRegression(Model):
         None
         """
         n_samples, n_features = features.shape
-        self._weights = np.zeros(n_features)
-        self._bias = 0
+        weights = np.zeros(n_features)
+        bias = 0
 
-        learning_rate = self.hyper_parameters["learning_rate"]
-        iterations = self.hyper_parameters["iterations"]
-
-        for _ in range(iterations):
-            linear_model = np.dot(features, self._weights) + self._bias
+        for _ in range(self.hyper_parameters["iterations"]):
+            linear_model = np.dot(features, weights) + bias
             predictions = self._sigmoid(linear_model)
             dw = (1 / n_samples) * np.dot(features.T, (predictions - labels))
             db = (1 / n_samples) * np.sum(predictions - labels)
-            self._weights -= learning_rate * dw
-            self._bias -= learning_rate * db
+            weights -= self.hyper_parameters["learning_rate"] * dw
+            bias -= self.hyper_parameters["learning_rate"] * db
+
+        self.parameters = {
+            "weights": weights,
+            "bias": bias
+        }
+        self.is_fitted = True
 
     def _sigmoid(self, linear_model: np.ndarray) -> np.ndarray:
         """
@@ -90,7 +92,16 @@ class LogisticRegression(Model):
         -------
         ndarray
             Predicted values.
+
+        Raises
+        ------
+        ValueError
+            If the model has not been trained yet.
         """
-        linear_model = np.dot(features, self._weights) + self._bias
+        if not self.is_fitted:
+            raise ValueError("Model has not been trained, fit it first!")
+
+        linear_model = np.dot(features, self.parameters["weights"]) + \
+            self.parameters["bias"]
         probabilities = self._sigmoid(linear_model)
         return (probabilities >= 0.5).astype(int)
