@@ -1,0 +1,19 @@
+name: Style check
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  local_tests:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - run: python -m autoop.tests.main
