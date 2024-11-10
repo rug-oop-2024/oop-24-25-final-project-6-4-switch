@@ -11,5 +11,4 @@ from autoop.core.ml.model.regression.random_forest import (
 )
 
 
-print(f"{DecisionTree()}, {MultipleLinearRegression()}, " +
-      f"{RandomForest()} have been successfully imported")
+__all__ = ["DecisionTree", "MultipleLinearRegression", "RandomForest"]
