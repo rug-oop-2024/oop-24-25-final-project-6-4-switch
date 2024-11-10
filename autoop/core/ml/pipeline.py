@@ -119,7 +119,7 @@ class Pipeline():
         artifacts.append(Artifact(name="pipeline_config",
                                   data=pickle.dumps(pipeline_data),
                                   version="data",
-                                  asset_path=f"encoderpipeline_config"))
+                                  asset_path="encoderpipeline_config"))
         artifacts.append(
             self._model.to_artifact(name=f"pipeline_model_{self._model.type}"))
         return artifacts

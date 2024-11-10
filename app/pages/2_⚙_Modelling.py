@@ -187,9 +187,10 @@ if selected_dataset is not None:
                     if (st.button("save Pipeline?") and
                         (version == "" or len(version.split(".")) == 3) and
                             pipeline_name is not None):
-                        central_pipeline_artifact = save_pipeline(pipeline,
-                                                                  version,
-                                                                  pipeline_name)
+                        central_pipeline_artifact = save_pipeline(
+                            pipeline,
+                            version,
+                            pipeline_name)
 
                         automl.registry.register(central_pipeline_artifact)
                         for artifact in pipeline.artifacts:

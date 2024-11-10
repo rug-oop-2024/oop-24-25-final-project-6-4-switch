@@ -21,7 +21,7 @@ def save_pipeline(pipeline: Pipeline, name: str, version: str) -> Artifact:
         name=name,
         version=version,
         data=pickle.dumps(
-            {"data":[artifact.id for artifact in pipeline_artifacts]}),
+            {"data": [artifact.id for artifact in pipeline_artifacts]}),
         asset_path=f"{version}{name}")
 
     return artifact_pipeline
