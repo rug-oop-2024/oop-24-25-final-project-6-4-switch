@@ -2,13 +2,10 @@
 
 from autoop.core.ml.model.regression.decision_tree import (
     DecisionTree
-)
+) # noqa
 from autoop.core.ml.model.regression.multiple_linear_regression import (
     MultipleLinearRegression
-)
+) # noqa
 from autoop.core.ml.model.regression.random_forest import (
     RandomForest
-)
-
-
-__all__ = ["DecisionTree", "MultipleLinearRegression", "RandomForest"]
+) # noqa
