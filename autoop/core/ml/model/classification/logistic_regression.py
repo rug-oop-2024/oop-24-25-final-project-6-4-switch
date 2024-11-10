@@ -106,13 +106,8 @@ class LogisticRegression(Model):
             raise ValueError("Model has not been trained, fit it first!")
 
 
-        linear_model = np.dot(features, self.parameters["weights"]) + self.parameters["bias"]
+        linear_model = (np.dot(features, self.parameters["weights"]) +
+                        self.parameters["bias"])
         probabilities = self._sigmoid(linear_model)
-
-        predicted_classes = np.argmax(probabilities, axis=1)
-
-        # Convert the predicted class indices into one-hot encoded format
-        n_samples = len(predicted_classes)
-        one_hot_predictions = np.zeros((n_samples, self.parameters["weights"].shape[1]))
 
         return probabilities
