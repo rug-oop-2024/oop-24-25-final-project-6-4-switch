@@ -55,8 +55,8 @@ if selected_dataset is not None:
     feature_list: list["Feature"] = detect_feature_types(selected_dataset)
 
     target_colum: "Feature" = st.selectbox("select target feature",
-                                        feature_list,
-                                        index=None)
+                                           feature_list,
+                                           index=None)
 
     input_features: list["Feature"] | None = st.multiselect(
         "select inout features",
@@ -69,14 +69,14 @@ if selected_dataset is not None:
 
     if target_colum is not None and input_features not in [None, []]:
         split: float = st.slider("Select split in dataset.",
-                                min_value=0.1,
-                                max_value=0.9,
-                                value=0.8)
+                                 min_value=0.1,
+                                 max_value=0.9,
+                                 value=0.8)
 
         dictionary_models: dict[str, "Model"] = list_models(task_type)
         model_key: str | None = st.selectbox("select model.",
-                                            dictionary_models.keys(),
-                                            index=None)
+                                             dictionary_models.keys(),
+                                             index=None)
 
         metrics: list["Metric"] | None = st.multiselect(
             "select metrics.",
@@ -172,8 +172,8 @@ if selected_dataset is not None:
                         pipeline_result.keys())
 
                     text: list[str] = ["metrics of the pipeline:",
-                                    "metric results of pipeline:",
-                                    "predictions of the pipeline:"]
+                                       "metric results of pipeline:",
+                                       "predictions of the pipeline:"]
 
                     for text, key in zip(text, pipeline_result_keys):
                         st.write(text)
@@ -188,8 +188,8 @@ if selected_dataset is not None:
                         (version == "" or len(version.split(".")) == 3) and
                             pipeline_name is not None):
                         central_pipeline_artifact = save_pipeline(pipeline,
-                                                                version,
-                                                                pipeline_name)
+                                                                  version,
+                                                                  pipeline_name)
 
                         automl.registry.register(central_pipeline_artifact)
                         for artifact in pipeline.artifacts:
