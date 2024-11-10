@@ -60,7 +60,7 @@ class Model(ABC, Artifact):
         ...
 
     @property
-    def parameters(self) -> Dict[str: np.ndarray]:
+    def parameters(self) -> Dict[str, np.ndarray]:
         """
         Get strict parameters essential for prediction.
 
@@ -90,7 +90,7 @@ class Model(ABC, Artifact):
         self._parameters = parameters
 
     @property
-    def hyper_parameters(self) -> Dict[str: float]:
+    def hyper_parameters(self) -> Dict[str, float]:
         """
         Get hyperparameters useful for training.
 

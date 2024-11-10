@@ -44,14 +44,14 @@ class LinearDiscriminantAnalysis(Model):
         cov_matrix /= (features.shape[0] - len(classes))
         self._inv_cov_matrix = np.linalg.inv(cov_matrix)
 
-    def _compute_class(self, clas: Any, features: np.ndarray,
+    def _compute_class(self, clas: str, features: np.ndarray,
                        labels: np.ndarray) -> np.ndarray:
         """
         Compute the mean vectors and priors for a class.
 
         Parameters
         ----------
-        clas : Any
+        clas : str
             The class.
         features : ndarray
             Training features.
