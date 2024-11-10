@@ -19,8 +19,6 @@ class Model(ABC, Artifact):
         -------
         None
         """
-        # TODO this does not call artifact.
-        # also type is not set on any other model
         super().__init__()
 
     @abstractmethod

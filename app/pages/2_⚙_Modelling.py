@@ -172,6 +172,7 @@ if target_colum is not None and input_features not in [None, []]:
                                         help="format is 1.1.1")
                 pipeline_name = st.text_input("name of the pipeline")
 
+                # TODO finish saving
                 if (st.button("save Pipeline?") and
                     (version == "" or len(version.split(".")) == 3) and
                         pipeline_name is not None):
