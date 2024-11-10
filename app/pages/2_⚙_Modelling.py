@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from app.core.system import AutoMLSystem
 from app.datasets.list import list_dataset
 
-from app.modelling.models import get_models
+from app.modelling.models import list_models
 from app.modelling.get_metric import get_metrics
 from app.modelling.save import save_pipeline
 from app.modelling.task_type import get_task_type
@@ -72,7 +72,7 @@ if target_colum is not None and input_features not in [None, []]:
                              max_value=0.9,
                              value=0.8)
 
-    dictionary_models: dict[str, "Model"] = get_models(task_type)
+    dictionary_models: dict[str, "Model"] = list_models(task_type)
     model_key: str | None = st.selectbox("select model.",
                                          dictionary_models.keys(),
                                          index=None)

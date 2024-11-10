@@ -133,7 +133,7 @@ In this part you will integrate the library by importing your implemented classe
 - `ST/modelling/models`: Prompt the user to select a model based on the task type.
 - `ST/modelling/pipeline/split`: Prompt the user to select a dataset split.
 - `ST/modelling/pipeline/metrics`: Prompt the user to select a set of compatible metrics.
-- `ST/modelling/pipeline/summary`: Prompt the user with a beautifuly formatted pipeline summary with all the configurations.
+- `ST/modelling/pipeline/summary`: Prompt the user with a beautiful formatted pipeline summary with all the configurations.
 - `ST/modelling/pipeline/train`: Train the class and report the results of the pipeline.
 
 ## Extra requirements
@@ -147,7 +147,7 @@ In this part you will integrate the library by importing your implemented classe
 
 # Part III: Go beyond
 
-There are many suggestions in the `README.md` to further extend this and make it more interesting and creative. We give up to 2 points of bonus based on the complexity of your additions and demostration of OOP concepts. 
+There are many suggestions in the `README.md` to further extend this and make it more interesting and creative. We give up to 2 points of bonus based on the complexity of your additions and demostration of OOP concepts.
 
 # Final thoughts
 

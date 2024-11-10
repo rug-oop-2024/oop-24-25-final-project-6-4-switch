@@ -135,4 +135,15 @@ class Model(ABC, Artifact):
             "hyperparameters": self._hyper_parameters
         }
 
-    # TODO to artifact method. (used in ta code)
+    def to_artifact(self, name: str) -> "Model":
+        """
+        Prepare the model to be an artifact.
+
+        Returns:
+        the model itself with the artifact attributes filled out.
+        """
+        self.name = name
+        self.data = {"parameters": self._parameters,
+                     "hyperparameters": self._hyper_parameters}
+
+        return self
