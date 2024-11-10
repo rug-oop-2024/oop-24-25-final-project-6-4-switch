@@ -1,4 +1,4 @@
-name: Style check
+name: run all tests
 
 on:
   push:
